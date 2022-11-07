@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  trip-db:
+    image: postgres:latest
+    container_name: trip-db
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: tripinworld
+    volumes:
+      - trip-db:/var/lib/postgres
+
+  trip-redis:
+    image: redis:latest
+    command: redis-server --port 6379
+    container_name: trip-redis
+    ports:
+      - 6479:6379
+    volumes:
+      - trip-redis:/val/lib/redis
+
+  trip-backend:
+    build: .
+    container_name: trip-backend
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    depends_on:
+      - trip-db
+
+volumes:
+  trip-db:
+  trip-redis:

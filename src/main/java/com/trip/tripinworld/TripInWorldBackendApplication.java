@@ -1,4 +1,4 @@
-package com.trip.trip_in_world;
+package com.trip.tripinworld;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
