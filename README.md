@@ -1,6 +1,6 @@
 ## How to run on Docker container
 
-1. make bootJar file
+1. ./gradlew clean build
 2. docker-compose build
     
     ```
