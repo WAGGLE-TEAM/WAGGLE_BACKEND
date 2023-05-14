@@ -17,6 +17,7 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 .env
+**/src/main/resources/application.yml
 
 
 ### IntelliJ IDEA ###
@@ -37,3 +38,5 @@ out/
 
 ### VS Code ###
 .vscode/
+
+!/.env
