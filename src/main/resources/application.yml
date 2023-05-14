@@ -1,4 +1,3 @@
-# local, dev, prod 공통 설정
 server:
   port: 8080
   tomcat:
@@ -12,33 +11,9 @@ logging:
           descriptor:
             sql: trace
 
----
-
 spring:
   config:
     activate:
       on-profile: local
-  datasource:
-    username: root
-    password: tripinworld
-    url: jdbc:postgresql://localhost:5432/root?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&tinyInt1isBit=false
-    driver-class-name: org.postgresql.Driver
-  sql:
-    init:
-      mode: always
-  jpa:
-    show-sql: true
-
----
-
-spring:
-  config:
-    activate:
-      on-profile: dev
 
 
----
-spring:
-  config:
-    activate:
-      on-profile: prod
