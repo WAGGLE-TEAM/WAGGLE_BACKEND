@@ -37,3 +37,6 @@ out/
 .vscode/
 
 /application
+/dependencies
+/spring-boot-loader
+/snapshot-dependencies
