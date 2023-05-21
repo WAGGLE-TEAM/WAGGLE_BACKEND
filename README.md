@@ -8,8 +8,8 @@
     docker-compose up -d --build
     ```
     
-- If you already build docker-compose, please follow this command
+   - If you already build docker-compose, please follow this command
     
-    ```
-    docker-compose up
-    ```
+       ```
+       docker-compose up
+       ```
