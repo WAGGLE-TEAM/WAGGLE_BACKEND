@@ -27,7 +27,7 @@ jobs:
       with:
         path: |
           ~/.gradle/caches
-          ~/.gracle/wrapper
+          ~/.gradle/wrapper
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
         restore-keys: |
           ${{ runner.os }}-gradle
@@ -40,5 +40,5 @@ jobs:
       with:
         arguments: build
         
-    - name: Test With Gradle
-      run: ./gradlew test
+    - name: Separate of Spring application layers
+      run: java -Djarmode=layertools -jar build/libs/trip_in_world-0.0.1-SNAPSHOT.jar extract
