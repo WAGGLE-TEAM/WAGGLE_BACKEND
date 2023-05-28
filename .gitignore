@@ -45,3 +45,4 @@ out/
 /dependencies
 /spring-boot-loader
 /snapshot-dependencies
+/.env
