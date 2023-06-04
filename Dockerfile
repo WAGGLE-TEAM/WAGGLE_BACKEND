@@ -8,5 +8,7 @@ WORKDIR application
 COPY ./dependencies/ ./
 COPY ./spring-boot-loader/ ./
 COPY ./snapshot-dependencies/ ./
+RUN true
 COPY ./application/ ./
+RUN true
 ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
