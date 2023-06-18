@@ -8,16 +8,12 @@ spring:
       generate-ddl: off
     datasource:
       driver-class-name: org.h2.Driver
-      url: jdbc:h2:mem:test;MODE=PostgreSQL;DATABASE_TO_UPPER=false;CASE_INSENSITIVE_IDENTIFIERS=true
+      url: jdbc:h2:mem:test;MODE=PostgreSQL;CASE_INSENSITIVE_IDENTIFIERS=true;
       username: root
       password: root
       initialization-mode: always
-      #spring.sql.init.schema-locations=classpath:schema.sql
-      #spring.sql.init.data-locations=classpath:data.sql
-  config:
-    activate:
-      on-profile: local
-
+      schema: classpath:schema-h2.sql
+      data: classpath:data-h2.sql
   jpa:
     hibernate:
       ddl-auto: create
