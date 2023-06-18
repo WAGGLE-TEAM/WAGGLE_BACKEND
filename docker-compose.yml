@@ -13,6 +13,7 @@ services:
       POSTGRES_DB: "${DB_NAME}"
     volumes:
       - trip-db:/var/lib/postgres
+      - ./postgres-init.d:/docker-entrypoint-initdb.d/
     env_file:
       - .env
 
@@ -24,7 +25,6 @@ services:
       - "6479:6379"
     volumes:
       - trip-redis:/val/lib/redis
-      - ./postgres-init.d:/docker-entrypoint-initdb.d
 
   trip-backend:
     environment:
