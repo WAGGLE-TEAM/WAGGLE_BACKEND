@@ -124,3 +124,11 @@ test {
 build {
     dependsOn copyDocument
 }
+
+task copyPrivate(type: Copy) {
+    copy {
+        from './backend-config'
+        include "*.yml"
+        into 'src/main/resources'
+    }
+}
