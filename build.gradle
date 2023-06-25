@@ -60,12 +60,7 @@ dependencies {
     // db
     implementation 'com.h2database:h2'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-    runtimeOnly 'org.postgresql:postgresql'
 }
-
-//tasks.named('test') {
-//    useJUnitPlatform()
-//}
 
 def querydslDir = "$buildDir/generated/querydsl"
 

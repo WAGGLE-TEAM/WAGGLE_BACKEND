@@ -10,10 +10,10 @@ import javax.persistence.EntityManager;
 @Configuration
 @RequiredArgsConstructor
 public class QueryDslConfig {
-    private final EntityManager em;
+    private final EntityManager entitymanager;
 
     @Bean
     public JPAQueryFactory queryFactory() {
-        return new JPAQueryFactory(em);
+        return new JPAQueryFactory(entitymanager);
     }
 }

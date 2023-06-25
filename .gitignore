@@ -16,7 +16,6 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
-./.env
 **/src/main/resources/application.yml
 **/src/main/resources/application-dev.yml
 **/src/main/resources/application-prod.yml
@@ -41,7 +40,6 @@ out/
 ### VS Code ###
 .vscode/
 
-.env
 /application
 /dependencies
 /spring-boot-loader
