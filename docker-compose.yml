@@ -1,37 +1,44 @@
 version: '3'
 
 services:
-  trip-db:
+  db:
     image: postgres:latest
     container_name: trip-db
     restart: always
     ports:
-      - 5432:5432
+      - "5432:5432"
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: tripinworld
+      POSTGRES_USER: ${DB_USER_ID}
+      POSTGRES_PASSWORD: ${DB_USER_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      PGDATA: /data/postgres
     volumes:
-      - trip-db:/var/lib/postgres
+      - ./db:/var/lib/postgres/data
+      - ./postgres-init.d:/docker-entrypoint-initdb.d/
+    env_file:
+      - .env
 
-  trip-redis:
+  redis:
     image: redis:latest
     command: redis-server --port 6379
     container_name: trip-redis
     ports:
-      - 6479:6379
+      - "6479:6379"
     volumes:
-      - trip-redis:/val/lib/redis
+      - ./redis:/val/lib/redis
 
-  trip-backend:
+  backend:
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
     build: .
     container_name: trip-backend
     expose:
       - 8080
     ports:
-      - 8080:8080
+      - "8080:8080"
     depends_on:
-      - trip-db
+      - db
 
 volumes:
-  trip-db:
-  trip-redis:
+  db:
+  redis:

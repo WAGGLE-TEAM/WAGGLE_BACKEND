@@ -16,6 +16,10 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
+**/src/main/resources/application.yml
+**/src/main/resources/application-dev.yml
+**/src/main/resources/application-prod.yml
+
 
 ### IntelliJ IDEA ###
 .idea
@@ -40,3 +44,4 @@ out/
 /dependencies
 /spring-boot-loader
 /snapshot-dependencies
+/.env
