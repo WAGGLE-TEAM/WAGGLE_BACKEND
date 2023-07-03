@@ -1,4 +1,4 @@
-package com.trip.tripinworld.global.config;
+package com.trip.tripinworld.common.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
