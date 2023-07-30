@@ -1,0 +1,48 @@
+name: Backend CI
+
+on:
+  pull_request:
+    branches:
+      - main   # 테스트 서버
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  backend-cd:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+      - name: Gradle Caching
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Gradle execute permission for gradlew
+        run: chmod +x ./gradlew
+      - name: Build with Gradle
+        run: ./gradlew clean build
+      - name: Separate of Spring application layers
+        run: java -Djarmode=layertools -jar build/libs/${{ secrets.JAR_NAME }} extract
+      - name: Build Docker & push
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.REPOSITORY }}:backend-blue .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.REPOSITORY }}:backend-green .
+          docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.REPOSITORY }}:backend-blue
+          docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.REPOSITORY }}:backend-green
+
+
