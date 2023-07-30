@@ -1,3 +1,9 @@
+buildscript {
+    ext {
+        queryDslVersion = "5.0.0"
+    }
+}
+
 plugins {
     id 'java'
 
@@ -12,29 +18,9 @@ plugins {
     id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
-allprojects {
-    group = 'com.trip'
-    version = '0.0.1-SNAPSHOT'
-    sourceCompatibility = '11'
-
-    repositories {
-        mavenCentral()
-    }
-}
-
-subprojects {   // 각 모듈에 적용할 공통 설정
-    apply plugin: 'java'
-    apply plugin: 'org.springframework.boot' version '2.7.5'
-    apply plugin: 'io.spring.dependency-management' version '1.0.15.RELEASE'
-
-    dependencies {
-        // lombok
-        compileOnly 'org.projectlombok:lombok'
-        annotationProcessor 'org.projectlombok:lombok'
-        testCompileOnly 'org.projectlombok:lombok'
-        testAnnotationProcessor 'org.projectlombok:lombok'
-    }
-}
+group = 'com.trip'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
 
 configurations {
     compileOnly {
@@ -43,6 +29,9 @@ configurations {
     querydsl.extendsFrom compileClasspath
 }
 
+repositories {
+    mavenCentral()
+}
 
 dependencies {
     // Spring Boot
@@ -62,17 +51,17 @@ dependencies {
     // Spring REST Docs
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 
-
+    // lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
 
     // db
     implementation 'com.h2database:h2'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     runtimeOnly 'org.postgresql:postgresql'
 }
-
-//tasks.named('test') {
-//    useJUnitPlatform()
-//}
 
 def querydslDir = "$buildDir/generated/querydsl"
 
@@ -130,4 +119,12 @@ test {
 
 build {
     dependsOn copyDocument
+}
+
+task copyPrivate(type: Copy) {
+    copy {
+        from './backend-config'
+        include "*.yml"
+        into 'src/main/resources'
+    }
 }

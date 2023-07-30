@@ -1,4 +1,5 @@
 rootProject.name = 'trip_in_world'
-include 'common'
-include 'scheduler'
-include 'service'
+include 'waggle-common'
+include 'waggle-scheduler'
+include 'waggle-service'
+include 'waggle-admin'
