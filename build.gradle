@@ -5,7 +5,11 @@ plugins {
     id 'org.asciidoctor.jvm.convert' version '3.3.2'
 }
 
-allprojects {
+repositories {
+    mavenCentral()
+}
+
+subprojects {
     group = 'com.trip'
     version = '0.0.1-SNAPSHOT'
 
