@@ -1,18 +1,20 @@
 ## How to run on Docker container
 
-1. ./gradlew clean build
-2. java -Djarmode=layertools -jar build/libs/${jar file name} extract
-3. docker-compose build
-    
+1. cd waggle-api
+2.  ./gradlew clean build
+3.  java -Djarmode=layertools -jar build/libs/${jar file name} extract
+4. cd ..
+5. docker-compose build
+
+    ```java
+     docker-compose up -d --build
     ```
-    docker-compose up -d --build
-    ```
-    
-   - If you already build docker-compose, please follow this command
-    
-       ```
-       docker-compose up
-       ```
+
+    - If you already build docker-compose, please follow this command
+
+        ```java
+        docker-compose up
+        ```
 
 ## Project structure
 
