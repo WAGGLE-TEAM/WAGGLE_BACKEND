@@ -1,4 +1,4 @@
-package com.trip.config;
+package com.trip.api.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;

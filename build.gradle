@@ -5,20 +5,35 @@ plugins {
     id 'org.asciidoctor.jvm.convert' version '3.3.2'
 }
 
+group = 'com.trip'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
 repositories {
     mavenCentral()
 }
 
-subprojects {
-    group = 'com.trip'
-    version = '0.0.1-SNAPSHOT'
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
 
+test {
+    useJUnitPlatform()
+}
+
+springBoot {
+    mainClass = 'com.trip.api'
+}
+
+subprojects {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'org.asciidoctor.jvm.convert'
 
     sourceCompatibility = '11'
+    targetCompatibility = '11'
 
     repositories {
         mavenCentral()
