@@ -82,7 +82,7 @@ clean {
 
 task copyPrivate(type: Copy) {
     copy {
-        from './backend-config'
+        from '../backend-config'
         include "*.yml"
         into 'src/main/resources'
     }
