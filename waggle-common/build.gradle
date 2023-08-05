@@ -2,15 +2,6 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-aop"
 }
 
-bootJar {
-    // 실행 가능한 모듈로 패키징 할 필요 없음
-    enabled = false
-}
-
-jar {
-    enabled = true
-}
-
 test {
     useJUnitPlatform()
 }

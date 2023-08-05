@@ -45,3 +45,8 @@ out/
 /spring-boot-loader
 /snapshot-dependencies
 /.env
+
+/waggle-api/application
+/waggle-api/dependencies
+/waggle-api/spring-boot-loader
+/waggle-api/snapshot-dependencies

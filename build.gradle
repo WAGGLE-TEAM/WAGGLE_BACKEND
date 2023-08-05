@@ -3,6 +3,7 @@ plugins {
     id 'org.springframework.boot' version '2.7.5'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
     id 'org.asciidoctor.jvm.convert' version '3.3.2'
+    id 'application'
 }
 
 group = 'com.trip'
@@ -22,7 +23,7 @@ test {
     useJUnitPlatform()
 }
 
-springBoot {
+application {
     mainClass = 'com.trip.api'
 }
 
@@ -34,6 +35,13 @@ subprojects {
 
     sourceCompatibility = '11'
     targetCompatibility = '11'
+
+    bootJar.enabled = false
+    jar.enabled = true
+
+    if (name == 'waggle-api') {
+        bootJar.enabled = true
+    }
 
     repositories {
         mavenCentral()
