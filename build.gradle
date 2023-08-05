@@ -1,15 +1,8 @@
-buildscript {
-    ext {
-        springBootVersion = '2.7.5'
-        dependencyManagementVersion = '1.0.15.RELEASE'
-        queryDslVersion = '5.0.0'
-    }
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
-    }
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.5'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'org.asciidoctor.jvm.convert' version '3.3.2'
 }
 
 allprojects {
@@ -19,11 +12,16 @@ allprojects {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'org.asciidoctor.jvm.convert'
 
     sourceCompatibility = '11'
 
     repositories {
         mavenCentral()
+    }
+
+    ext {
+        snippetsDir = file('./build/generated-snippets')
     }
 
     dependencies {
@@ -39,5 +37,42 @@ allprojects {
         annotationProcessor 'org.projectlombok:lombok'
         testCompileOnly 'org.projectlombok:lombok'
         testAnnotationProcessor 'org.projectlombok:lombok'
+
+        // Spring REST Docs
+        testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+    }
+
+    asciidoctor.doFirst {
+        delete file('src/main/resources/static/docs')
+    }
+
+    javadoc {
+        options.addStringOption("locale","ko_KR");
+        options.addStringOption("encoding","UTF-8");
+        options.addStringOption("charset","UTF-8");
+        options.addStringOption("docencoding","UTF-8");
+    }
+
+    asciidoctor {
+        inputs.dir snippetsDir
+        // 다른 Task 에 의존한다는 것을 알리는 것이다.
+        // test Task 에 의존함을 알린다.
+        // asciidoctor task 를 실행할 때, test task 를 먼저 실행한다.
+        dependsOn test
+    }
+
+    task copyDocument(type: Copy) {
+        dependsOn asciidoctor
+        from file("build/docs/asciidoc")
+        into file("src/main/resources/static/docs")
+    }
+
+    build {
+        dependsOn copyDocument
+    }
+
+    test {
+        useJUnitPlatform()
+        outputs.dir snippetsDir
     }
 }

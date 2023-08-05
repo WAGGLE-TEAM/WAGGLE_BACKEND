@@ -1,12 +1,9 @@
 plugins {
-    // Asciidoctor
-    id 'org.asciidoctor.jvm.convert' version '3.3.2'
     // QueryDSL
     id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
 ext {
-    snippetsDir = file('./build/generated-snippets')
     queryDslVersion = "5.0.0"
 }
 
@@ -15,21 +12,6 @@ configurations {
         extendsFrom annotationProcessor
     }
     querydsl.extendsFrom compileClasspath
-}
-
-javadoc {
-    options.addStringOption("locale","ko_KR");
-    options.addStringOption("encoding","UTF-8");
-    options.addStringOption("charset","UTF-8");
-    options.addStringOption("docencoding","UTF-8");
-}
-
-asciidoctor {
-    inputs.dir snippetsDir
-    // 다른 Task 에 의존한다는 것을 알리는 것이다.
-    // test Task 에 의존함을 알린다.
-    // asciidoctor task 를 실행할 때, test task 를 먼저 실행한다.
-    dependsOn test
 }
 
 dependencies {
@@ -41,23 +23,10 @@ dependencies {
     annotationProcessor "jakarta.annotation:jakarta.annotation-api" // java.lang.NoClassDefFoundError (javax.annotation.Generated) 대응 코드
     annotationProcessor "jakarta.persistence:jakarta.persistence-api" // java.lang.NoClassDefFoundError (javax.annotation.Entity) 대응 코드
 
-    // Spring REST Docs
-    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-
     // db
     implementation 'com.h2database:h2'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     runtimeOnly 'org.postgresql:postgresql'
-}
-
-asciidoctor.doFirst {
-    delete file('src/main/resources/static/docs')
-}
-
-task copyDocument(type: Copy) {
-    dependsOn asciidoctor
-    from file("build/docs/asciidoc")
-    into file("src/main/resources/static/docs")
 }
 
 def querydslDir = "$buildDir/generated/querydsl"
@@ -90,9 +59,8 @@ task copyPrivate(type: Copy) {
 
 test {
     useJUnitPlatform()
-    outputs.dir snippetsDir
 }
 
 build {
-    dependsOn copyDocument
+    dependsOn copyPrivate
 }
