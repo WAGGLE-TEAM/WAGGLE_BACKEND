@@ -4,6 +4,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
     id 'org.asciidoctor.jvm.convert' version '3.3.2'
     id 'application'
+    id 'jacoco'
 }
 
 group = 'com.trip'
@@ -26,11 +27,16 @@ application {
     mainClass = 'com.trip.api'
 }
 
+jacoco {
+    toolVersion = '0.8.5'
+}
+
 subprojects {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'org.asciidoctor.jvm.convert'
+    apply plugin: 'jacoco'
 
     sourceCompatibility = '11'
     targetCompatibility = '11'
@@ -102,5 +108,27 @@ subprojects {
     test {
         useJUnitPlatform()
         outputs.dir snippetsDir
+    }
+
+    jacocoTestReport {
+        reports {
+            html.required = true
+            xml.required = false
+            csv.required = true
+        }
+    }
+
+    jacocoTestCoverageVerification {
+        violationRules {
+            rule {
+                element = 'CLASS'
+
+                limit {
+                    counter = 'BRANCH'
+                    value = 'COVEREDRATIO'
+                    minimum = 0.70
+                }
+            }
+        }
     }
 }
