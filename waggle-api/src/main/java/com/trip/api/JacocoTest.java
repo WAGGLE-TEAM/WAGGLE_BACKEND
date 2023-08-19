@@ -12,4 +12,8 @@ public class JacocoTest {
                 return "error";
         }
     }
+
+    public String bye() {
+        return "안녕히가세요!";
+    }
 }

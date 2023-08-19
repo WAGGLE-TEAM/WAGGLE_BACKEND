@@ -108,6 +108,7 @@ subprojects {
     test {
         useJUnitPlatform()
         outputs.dir snippetsDir
+        finalizedBy 'jacocoTestReport'
     }
 
     jacocoTestReport {
@@ -116,6 +117,7 @@ subprojects {
             xml.required = false
             csv.required = true
         }
+        finalizedBy 'jacocoTestCoverageVerification'
     }
 
     jacocoTestCoverageVerification {
@@ -128,6 +130,14 @@ subprojects {
                     value = 'COVEREDRATIO'
                     minimum = 0.70
                 }
+
+                limit {
+                    counter = 'METHOD'
+                    value = 'COVEREDRATIO'
+                    minimum = 0.50
+                }
+
+                excludes = ["*.Q*", "*.C*", "*.T*"]
             }
         }
     }
