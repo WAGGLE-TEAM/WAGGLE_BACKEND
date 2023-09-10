@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @NoArgsConstructor
 @SQLDelete(sql = "UPDATE chat_message SET is_deleted = true WHERE id = ?")
-public class ChatMessage {
+public class ChatRoom {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class ChatMessage {
     @Column(name = "is_deleted")
     private boolean isDeleted;
 
-    public ChatMessage(String name) {
+    public ChatRoom(String name) {
         this.name = name;
         this.isDeleted = false;
     }
