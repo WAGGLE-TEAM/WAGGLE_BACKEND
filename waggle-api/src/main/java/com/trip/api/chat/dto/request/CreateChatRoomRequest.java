@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 
 @Getter
-public class ChatRoomRequest {
+public class CreateChatRoomRequest {
 
     @NotEmpty
     private ArrayList<Integer> joinUsers;
