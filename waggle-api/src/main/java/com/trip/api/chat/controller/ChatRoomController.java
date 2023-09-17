@@ -14,8 +14,4 @@ import java.net.URI;
 @RestController
 public class ChatRoomController {
 
-    @PostMapping
-    public ResponseEntity<Void> createChatRoom(@RequestBody @Valid final ChatRoomRequest chatRoomRequest) {
-        return ResponseEntity.created(URI.create())
-    }
 }
