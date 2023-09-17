@@ -9,6 +9,8 @@ import com.trip.api.chat.repository.ChatRoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Service
 public class ChatRoomService {
@@ -22,5 +24,10 @@ public class ChatRoomService {
         ChatRoom chatRoom = chatRoomMapper.convertRequestDtoToEntity(chatRoomRequest);
         Long chatRoomId = chatRoomRepository.save(chatRoom).getId();
         return chatRoomId;
+    }
+
+    public void deleteChatRoom(Long chatRoomId) {
+        Optional<ChatRoom> chatRoom = chatRoomRepository.findById(chatRoomId);
+        chatRoomRepository.deleteById(chatRoom.get().getId());
     }
 }
