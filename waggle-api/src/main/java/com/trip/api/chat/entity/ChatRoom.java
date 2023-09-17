@@ -20,6 +20,9 @@ public class ChatRoom {
     @NotNull
     private String name;
 
+    @NotNull
+    private Long creator;
+
     @Column(name = "is_deleted", nullable = false)
     private Boolean isDeleted;
 }
