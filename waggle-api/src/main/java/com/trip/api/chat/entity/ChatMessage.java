@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Entity
 @NoArgsConstructor
+@Table(name = "chat_message")
 @SQLDelete(sql = "UPDATE chat_message SET is_deleted = true WHERE id = ?")
 public class ChatMessage {
 

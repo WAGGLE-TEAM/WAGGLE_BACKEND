@@ -8,6 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter
+@Table(name = "chat_room_member")
 @NoArgsConstructor
 @SQLDelete(sql = "UPDATE chat_room_member SET is_deleted = true WHERE id = ?")
 public class ChatRoomMember {

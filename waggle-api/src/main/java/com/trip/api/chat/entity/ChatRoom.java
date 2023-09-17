@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
+@Table(name = "chat_room")
 @NoArgsConstructor
 @SQLDelete(sql = "UPDATE chat_room SET is_deleted = true WHERE id = ?")
 public class ChatRoom {
