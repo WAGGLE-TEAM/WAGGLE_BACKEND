@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -23,10 +24,12 @@ public class ChatRoomService {
 
     private final ChatRoomRepository chatRoomRepository;
     private final ChatRoomQueryDslRepository chatRoomQueryDslRepository;
+    private final ChatRoomMemberRepository chatRoomMemberRepository;
     private final ChatRoomMemberDao chatRoomMemberDao;
     private final ChatRoomMapper chatRoomMapper;
 
 
+    @Transactional
     public Long createChatRoom(CreateChatRoomRequest chatRoomRequest) {
         ChatRoom chatRoom = chatRoomMapper.convertRequestDtoToEntity(chatRoomRequest);
         List<Integer> joinUsers = chatRoomRequest.getJoinUsers();
@@ -39,5 +42,11 @@ public class ChatRoomService {
     public void deleteChatRoom(Long chatRoomId) {
         Optional<ChatRoom> chatRoom = chatRoomRepository.findById(chatRoomId);
         chatRoomRepository.deleteById(chatRoom.get().getId());
+    }
+
+    @Transactional
+    public void exitChatRoom(Long chatRoomId, Long userId) {
+        Optional<ChatRoom> chatRoom = chatRoomRepository.findById(chatRoomId);
+        chatRoomMemberRepository.deleteChatRoomMember(chatRoom.get().getId(), userId);
     }
 }

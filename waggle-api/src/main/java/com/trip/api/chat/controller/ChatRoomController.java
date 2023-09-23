@@ -26,4 +26,11 @@ public class ChatRoomController {
         chatRoomService.deleteChatRoom(chatRoomId);
         return ResponseEntity.ok().build();
     }
+
+    @DeleteMapping("/exit-room/{chatRoomId}")
+    public ResponseEntity<Void> exitChatRoom(@PathVariable Long chatRoomId) {
+        // TODO: get userId from jwt
+        chatRoomService.exitChatRoom(chatRoomId, 71L);
+        return ResponseEntity.ok().build();
+    }
 }
