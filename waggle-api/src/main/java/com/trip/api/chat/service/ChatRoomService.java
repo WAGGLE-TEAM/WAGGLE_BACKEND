@@ -8,13 +8,9 @@ import com.trip.api.chat.repository.ChatRoomMemberRepository;
 import com.trip.api.chat.repository.ChatRoomQueryDslRepository;
 import com.trip.api.chat.repository.ChatRoomRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.jdbc.core.BatchPreparedStatementSetter;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +27,7 @@ public class ChatRoomService {
 
     @Transactional
     public Long createChatRoom(CreateChatRoomRequest chatRoomRequest) {
-        ChatRoom chatRoom = chatRoomMapper.convertRequestDtoToEntity(chatRoomRequest);
+        ChatRoom chatRoom = chatRoomMapper.convertCreateChatRoomRequestDtoToEntity(chatRoomRequest);
         List<Integer> joinUsers = chatRoomRequest.getJoinUsers();
         Long chatRoomId = chatRoomRepository.save(chatRoom).getId();
         chatRoomMemberDao.saveAllChatMembers(joinUsers, chatRoomId);

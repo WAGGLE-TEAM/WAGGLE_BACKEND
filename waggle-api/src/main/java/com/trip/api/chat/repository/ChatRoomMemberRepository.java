@@ -12,7 +12,9 @@ public interface ChatRoomMemberRepository extends JpaRepository<ChatRoomMember, 
     @Modifying
     @Query(
             nativeQuery = true,
-            value = "UPDATE chat_room_member SET is_exited = true WHERE chat_room_id = :chatRoomId AND member_id = :memberId"
+            value = "UPDATE chat_room_member " +
+                    "SET is_exited = true " +
+                    "WHERE chat_room_id = :chatRoomId AND member_id = :memberId"
     )
     void deleteChatRoomMember(Long chatRoomId, Long memberId);
 }
