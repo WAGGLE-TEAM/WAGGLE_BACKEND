@@ -17,7 +17,7 @@ public class ChatRoomMemberDao {
 
     public void saveAllChatMembers(List<Integer> joinUsers, Long chatRoomId) {
         jdbcTemplate.batchUpdate(
-        "INSERT INTO chat_room_member (chat_room_id, member_id, is_exited) VALUES(" + chatRoomId + ", ?, true)",
+            "INSERT INTO chat_room_member (chat_room_id, member_id, is_exited) VALUES(" + chatRoomId + ", ?, true)",
             new BatchPreparedStatementSetter() {
                 @Override
                 public void setValues(PreparedStatement ps, int i) throws SQLException {
