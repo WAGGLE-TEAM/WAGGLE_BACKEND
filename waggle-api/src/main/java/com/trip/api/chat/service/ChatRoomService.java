@@ -3,6 +3,7 @@ package com.trip.api.chat.service;
 import com.trip.api.chat.dto.request.CreateChatRoomRequest;
 import com.trip.api.chat.entity.ChatRoom;
 import com.trip.api.chat.mapper.ChatRoomMapper;
+import com.trip.api.chat.repository.ChatRoomMemberDao;
 import com.trip.api.chat.repository.ChatRoomMemberRepository;
 import com.trip.api.chat.repository.ChatRoomQueryDslRepository;
 import com.trip.api.chat.repository.ChatRoomRepository;
@@ -22,28 +23,15 @@ public class ChatRoomService {
 
     private final ChatRoomRepository chatRoomRepository;
     private final ChatRoomQueryDslRepository chatRoomQueryDslRepository;
-    private final ChatRoomMemberRepository chatRoomMemberRepository;
+    private final ChatRoomMemberDao chatRoomMemberDao;
     private final ChatRoomMapper chatRoomMapper;
-    private final JdbcTemplate jdbcTemplate;
+
 
     public Long createChatRoom(CreateChatRoomRequest chatRoomRequest) {
         ChatRoom chatRoom = chatRoomMapper.convertRequestDtoToEntity(chatRoomRequest);
         List<Integer> joinUsers = chatRoomRequest.getJoinUsers();
-
         Long chatRoomId = chatRoomRepository.save(chatRoom).getId();
-        jdbcTemplate.batchUpdate("INSERT INTO chat_room_member (chat_room_id, member_id, is_exited) VALUES(" + chatRoomId + ", CAST(? AS bigint), true)",
-                new BatchPreparedStatementSetter() {
-                    @Override
-                    public void setValues(PreparedStatement ps, int i) throws SQLException {
-                        ps.setString(1, String.valueOf(joinUsers.get(i)));
-                    }
-
-                    @Override
-                    public int getBatchSize() {
-                        return joinUsers.size();
-                    }
-                }
-        );
+        chatRoomMemberDao.saveAllChatMembers(joinUsers, chatRoomId);
 
         return chatRoomId;
     }
