@@ -33,4 +33,9 @@ public class ChatRoomController {
         chatRoomService.exitChatRoom(chatRoomId, 71L);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping
+    public ResponseEntity<T> getMyChatRooms() {
+
+    }
 }

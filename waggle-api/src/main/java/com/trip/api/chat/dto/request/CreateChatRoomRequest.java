@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class CreateChatRoomRequest {
 
     @NotEmpty
-    private ArrayList<Integer> joinUsers;
+    private ArrayList<Long> joinUsers;
 
     @NotNull
     private Long chatRoomMaker;

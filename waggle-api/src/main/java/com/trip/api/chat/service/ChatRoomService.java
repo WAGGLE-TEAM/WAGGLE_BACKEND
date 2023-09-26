@@ -1,6 +1,7 @@
 package com.trip.api.chat.service;
 
 import com.trip.api.chat.dto.request.CreateChatRoomRequest;
+import com.trip.api.chat.dto.response.GetMyChatRoomResponse;
 import com.trip.api.chat.entity.ChatRoom;
 import com.trip.api.chat.mapper.ChatRoomMapper;
 import com.trip.api.chat.repository.ChatRoomMemberDao;
@@ -19,7 +20,6 @@ import java.util.Optional;
 public class ChatRoomService {
 
     private final ChatRoomRepository chatRoomRepository;
-    private final ChatRoomQueryDslRepository chatRoomQueryDslRepository;
     private final ChatRoomMemberRepository chatRoomMemberRepository;
     private final ChatRoomMemberDao chatRoomMemberDao;
     private final ChatRoomMapper chatRoomMapper;
@@ -28,7 +28,7 @@ public class ChatRoomService {
     @Transactional
     public Long createChatRoom(CreateChatRoomRequest chatRoomRequest) {
         ChatRoom chatRoom = chatRoomMapper.convertCreateChatRoomRequestDtoToEntity(chatRoomRequest);
-        List<Integer> joinUsers = chatRoomRequest.getJoinUsers();
+        List<Long> joinUsers = chatRoomRequest.getJoinUsers();
         Long chatRoomId = chatRoomRepository.save(chatRoom).getId();
         chatRoomMemberDao.saveAllChatMembers(joinUsers, chatRoomId);
 
