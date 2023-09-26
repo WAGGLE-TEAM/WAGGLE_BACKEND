@@ -17,12 +17,13 @@ public class ChatRoomMemberDao {
 
     public void saveAllChatMembers(List<Long> joinUsers, Long chatRoomId) {
         jdbcTemplate.batchUpdate(
-            "INSERT INTO chat_room_member (chat_room_id, member_id, is_exited) VALUES (?, ?, false)",
+            "INSERT INTO chat_room_member (chat_room_id, member_id, is_exited) VALUES (?, ?, ?)",
             new BatchPreparedStatementSetter() {
                 @Override
                 public void setValues(PreparedStatement ps, int i) throws SQLException {
                     ps.setLong(1, chatRoomId);
                     ps.setLong(2, joinUsers.get(i));
+                    ps.setBoolean(3, false);
                 }
 
                 @Override
