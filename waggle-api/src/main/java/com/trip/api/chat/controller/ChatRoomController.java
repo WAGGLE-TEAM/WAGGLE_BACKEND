@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @RequestMapping("/chat")
@@ -16,7 +17,7 @@ public class ChatRoomController {
     private final ChatRoomService chatRoomService;
 
     @PostMapping
-    public ResponseEntity<Void> createChatRoom(@RequestBody CreateChatRoomRequest chatRoomRequest) {
+    public ResponseEntity<Void> createChatRoom(@Valid @RequestBody CreateChatRoomRequest chatRoomRequest) {
         Long chatRoomId = chatRoomService.createChatRoom(chatRoomRequest);
         return ResponseEntity.created(URI.create("/chat/" + chatRoomId)).build();
     }
@@ -32,10 +33,5 @@ public class ChatRoomController {
         // TODO: get userId from jwt
         chatRoomService.exitChatRoom(chatRoomId, 71L);
         return ResponseEntity.ok().build();
-    }
-
-    @GetMapping
-    public ResponseEntity<T> getMyChatRooms() {
-
     }
 }
