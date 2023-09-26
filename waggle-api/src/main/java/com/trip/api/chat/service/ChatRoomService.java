@@ -1,7 +1,7 @@
 package com.trip.api.chat.service;
 
+import com.querydsl.core.Tuple;
 import com.trip.api.chat.dto.request.CreateChatRoomRequest;
-import com.trip.api.chat.dto.response.GetMyChatRoomResponse;
 import com.trip.api.chat.entity.ChatRoom;
 import com.trip.api.chat.mapper.ChatRoomMapper;
 import com.trip.api.chat.repository.ChatRoomMemberDao;
@@ -21,9 +21,9 @@ public class ChatRoomService {
 
     private final ChatRoomRepository chatRoomRepository;
     private final ChatRoomMemberRepository chatRoomMemberRepository;
+    private final ChatRoomQueryDslRepository chatRoomQueryDslRepository;
     private final ChatRoomMemberDao chatRoomMemberDao;
     private final ChatRoomMapper chatRoomMapper;
-
 
     @Transactional
     public Long createChatRoom(CreateChatRoomRequest chatRoomRequest) {
@@ -41,8 +41,12 @@ public class ChatRoomService {
     }
 
     @Transactional
-    public void exitChatRoom(Long chatRoomId, Long userId) {
+    public void exitChatRoom(Long chatRoomId, Long memberId) {
         Optional<ChatRoom> chatRoom = chatRoomRepository.findById(chatRoomId);
-        chatRoomMemberRepository.deleteChatRoomMember(chatRoom.get().getId(), userId);
+        chatRoomMemberRepository.deleteChatRoomMember(chatRoom.get().getId(), memberId);
+    }
+
+    public List<Tuple> getMyChatRooms(Long memberId) {
+        return chatRoomQueryDslRepository.findAllMyChatRoom(memberId);
     }
 }

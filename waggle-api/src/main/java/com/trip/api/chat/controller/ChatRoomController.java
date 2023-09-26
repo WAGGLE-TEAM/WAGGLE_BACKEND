@@ -1,5 +1,6 @@
 package com.trip.api.chat.controller;
 
+import com.querydsl.core.Tuple;
 import com.trip.api.chat.dto.request.CreateChatRoomRequest;
 import com.trip.api.chat.service.ChatRoomService;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RequestMapping("/chat")
 @RequiredArgsConstructor
@@ -33,5 +35,11 @@ public class ChatRoomController {
         // TODO: get userId from jwt
         chatRoomService.exitChatRoom(chatRoomId, 71L);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Tuple>> getMyChatRooms() {
+        List<Tuple> result = chatRoomService.getMyChatRooms(71L);
+        return ResponseEntity.ok().body(result);
     }
 }
