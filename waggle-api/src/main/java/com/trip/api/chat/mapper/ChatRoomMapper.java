@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 public class ChatRoomMapper {
 
     public ChatRoom convertCreateChatRoomRequestDtoToEntity(CreateChatRoomRequest request) {
-        ChatRoom chatRoom = new ChatRoom(request);
-        return chatRoom;
+        return new ChatRoom(request.getChatRoomName(), request.getChatRoomMaker());
     }
 }

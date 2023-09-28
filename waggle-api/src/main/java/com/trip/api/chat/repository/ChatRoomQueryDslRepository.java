@@ -17,7 +17,6 @@ import java.util.List;
 public class ChatRoomQueryDslRepository<T> {
 
     private final JPAQueryFactory jpaQueryFactory;
-
     private QChatRoom qChatRoom = QChatRoom.chatRoom;
     private QChatRoomMember qChatRoomMember = QChatRoomMember.chatRoomMember;
 

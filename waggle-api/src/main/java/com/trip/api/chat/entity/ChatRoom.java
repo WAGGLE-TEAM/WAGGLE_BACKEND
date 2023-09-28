@@ -1,6 +1,5 @@
 package com.trip.api.chat.entity;
 
-import com.trip.api.chat.dto.request.CreateChatRoomRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
@@ -28,9 +27,9 @@ public class ChatRoom {
     @Column(name = "is_deleted", nullable = false)
     private Boolean isDeleted;
 
-    public ChatRoom(CreateChatRoomRequest chatRoomRequest) {
-        this.name = chatRoomRequest.getChatRoomName();
-        this.creator = chatRoomRequest.getChatRoomMaker();
+    public ChatRoom(String name, Long creator) {
+        this.name = name;
+        this.creator = creator;
         this.isDeleted = false;
     }
 }
