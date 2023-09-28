@@ -43,4 +43,10 @@ public class ChatRoomController {
         List<GetMyChatRoomResponse> result = chatRoomService.getMyChatRooms(71L);
         return ResponseEntity.ok().body(result);
     }
+
+    @PostMapping("/{chatRoomId}")
+    public ResponseEntity<Void> enterToChatRoom(@PathVariable Long chatRoomId) {
+        chatRoomService.enterToChatRoom(71L, chatRoomId);
+        return ResponseEntity.created(URI.create("/chat" + chatRoomId)).build();
+    }
 }

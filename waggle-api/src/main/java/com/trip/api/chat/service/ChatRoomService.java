@@ -4,6 +4,7 @@ import com.querydsl.core.Tuple;
 import com.trip.api.chat.dto.request.CreateChatRoomRequest;
 import com.trip.api.chat.dto.response.GetMyChatRoomResponse;
 import com.trip.api.chat.entity.ChatRoom;
+import com.trip.api.chat.entity.ChatRoomMember;
 import com.trip.api.chat.mapper.ChatRoomMapper;
 import com.trip.api.chat.repository.ChatRoomMemberDao;
 import com.trip.api.chat.repository.ChatRoomMemberRepository;
@@ -49,5 +50,14 @@ public class ChatRoomService {
 
     public List<GetMyChatRoomResponse> getMyChatRooms(Long memberId) {
         return chatRoomQueryDslRepository.findAllMyChatRoom(memberId);
+    }
+
+    // TODO: 예외 처리
+    public void enterToChatRoom(Long memberId, Long chatRoomId) {
+        Long chatRoom = chatRoomRepository.findChatRoomById(chatRoomId);
+
+        if (chatRoom != null) {
+            chatRoomMemberRepository.save(new ChatRoomMember(memberId, chatRoomId));
+        }
     }
 }

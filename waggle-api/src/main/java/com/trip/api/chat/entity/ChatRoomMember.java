@@ -19,4 +19,9 @@ public class ChatRoomMember {
 
     @Column(name = "is_exited", nullable = false)
     private Boolean isExited;
+
+    public ChatRoomMember(Long memberId, Long chatRoomId) {
+        this.id = new ChatRoomMemberKey(chatRoomId, memberId);
+        this.isExited = false;
+    }
 }
