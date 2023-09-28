@@ -4,6 +4,7 @@ import lombok.Getter;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
 import java.util.ArrayList;
 
 @Getter

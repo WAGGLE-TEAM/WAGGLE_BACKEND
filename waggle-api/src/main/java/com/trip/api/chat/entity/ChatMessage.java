@@ -2,9 +2,11 @@ package com.trip.api.chat.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
+
 import javax.validation.constraints.NotBlank;
 
 @Getter

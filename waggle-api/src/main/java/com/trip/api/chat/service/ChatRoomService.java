@@ -1,6 +1,5 @@
 package com.trip.api.chat.service;
 
-import com.querydsl.core.Tuple;
 import com.trip.api.chat.dto.request.CreateChatRoomRequest;
 import com.trip.api.chat.dto.response.GetMyChatRoomResponse;
 import com.trip.api.chat.entity.ChatRoom;
@@ -10,10 +9,12 @@ import com.trip.api.chat.repository.ChatRoomMemberDao;
 import com.trip.api.chat.repository.ChatRoomMemberRepository;
 import com.trip.api.chat.repository.ChatRoomQueryDslRepository;
 import com.trip.api.chat.repository.ChatRoomRepository;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 

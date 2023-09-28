@@ -1,15 +1,18 @@
 package com.trip.api.chat.controller;
 
-import com.querydsl.core.Tuple;
 import com.trip.api.chat.dto.request.CreateChatRoomRequest;
 import com.trip.api.chat.dto.response.GetMyChatRoomResponse;
 import com.trip.api.chat.service.ChatRoomService;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
 import java.net.URI;
+
 import java.util.List;
 
 @RequestMapping("/chat")

@@ -1,8 +1,10 @@
 package com.trip.api.chat.entity;
 
 import com.trip.api.chat.dto.embedded.ChatRoomMemberKey;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
