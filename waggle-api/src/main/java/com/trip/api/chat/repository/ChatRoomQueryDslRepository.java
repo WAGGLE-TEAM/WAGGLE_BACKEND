@@ -31,7 +31,7 @@ public class ChatRoomQueryDslRepository<T> {
                 ))
                 .from(qChatRoom)
                 .join(qChatRoomMember).on(qChatRoom.id.eq(qChatRoomMember.id.chatRoomId))
-                .where(qChatRoomMember.id.memberId.eq(memberId))
+                .where(qChatRoomMember.id.memberId.eq(memberId), qChatRoomMember.isExited.eq(false))
                 .fetch();
     }
 }
