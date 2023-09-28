@@ -24,14 +24,20 @@ public class ChatRoomQueryDslRepository<T> {
     // TODO: 페이지네이션 적용 여부 확인
     public List<GetMyChatRoomResponse> findAllMyChatRoom(Long memberId) {
         return jpaQueryFactory
-                .select(Projections.constructor(
+                .select(
+                    Projections.constructor(
                         GetMyChatRoomResponse.class,
                         qChatRoom.id.as("chatRoomId"),
                         qChatRoom.name.as("title")
-                ))
+                    )
+                )
                 .from(qChatRoom)
                 .join(qChatRoomMember).on(qChatRoom.id.eq(qChatRoomMember.id.chatRoomId))
-                .where(qChatRoomMember.id.memberId.eq(memberId), qChatRoomMember.isExited.eq(false))
+                .where(
+                    qChatRoomMember.id.memberId.eq(memberId),
+                    qChatRoomMember.isExited.eq(false),
+                    qChatRoom.isDeleted.eq(false)
+                )
                 .fetch();
     }
 }
