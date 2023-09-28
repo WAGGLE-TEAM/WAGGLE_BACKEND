@@ -2,6 +2,7 @@ package com.trip.api.chat.service;
 
 import com.querydsl.core.Tuple;
 import com.trip.api.chat.dto.request.CreateChatRoomRequest;
+import com.trip.api.chat.dto.response.GetMyChatRoomResponse;
 import com.trip.api.chat.entity.ChatRoom;
 import com.trip.api.chat.mapper.ChatRoomMapper;
 import com.trip.api.chat.repository.ChatRoomMemberDao;
@@ -46,7 +47,7 @@ public class ChatRoomService {
         chatRoomMemberRepository.deleteChatRoomMember(chatRoom.get().getId(), memberId);
     }
 
-    public List<Tuple> getMyChatRooms(Long memberId) {
+    public List<GetMyChatRoomResponse> getMyChatRooms(Long memberId) {
         return chatRoomQueryDslRepository.findAllMyChatRoom(memberId);
     }
 }

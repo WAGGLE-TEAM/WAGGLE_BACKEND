@@ -1,7 +1,9 @@
 package com.trip.api.chat.repository;
 
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.trip.api.chat.dto.response.GetMyChatRoomResponse;
 import com.trip.api.chat.entity.ChatRoom;
 import com.trip.api.chat.entity.QChatRoom;
 import com.trip.api.chat.entity.QChatRoomMember;
@@ -20,9 +22,13 @@ public class ChatRoomQueryDslRepository<T> {
     private QChatRoomMember qChatRoomMember = QChatRoomMember.chatRoomMember;
 
     // TODO: 페이지네이션 적용 여부 확인
-    public List<Tuple> findAllMyChatRoom(Long memberId) {
+    public List<GetMyChatRoomResponse> findAllMyChatRoom(Long memberId) {
         return jpaQueryFactory
-                .select(qChatRoom.id, qChatRoom.name)
+                .select(Projections.constructor(
+                        GetMyChatRoomResponse.class,
+                        qChatRoom.id.as("chatRoomId"),
+                        qChatRoom.name.as("title")
+                ))
                 .from(qChatRoom)
                 .join(qChatRoomMember).on(qChatRoom.id.eq(qChatRoomMember.id.chatRoomId))
                 .where(qChatRoomMember.id.memberId.eq(memberId))

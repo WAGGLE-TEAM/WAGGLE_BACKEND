@@ -2,6 +2,7 @@ package com.trip.api.chat.controller;
 
 import com.querydsl.core.Tuple;
 import com.trip.api.chat.dto.request.CreateChatRoomRequest;
+import com.trip.api.chat.dto.response.GetMyChatRoomResponse;
 import com.trip.api.chat.service.ChatRoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -38,8 +39,8 @@ public class ChatRoomController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Tuple>> getMyChatRooms() {
-        List<Tuple> result = chatRoomService.getMyChatRooms(71L);
+    public ResponseEntity<List<GetMyChatRoomResponse>> getMyChatRooms() {
+        List<GetMyChatRoomResponse> result = chatRoomService.getMyChatRooms(71L);
         return ResponseEntity.ok().body(result);
     }
 }
