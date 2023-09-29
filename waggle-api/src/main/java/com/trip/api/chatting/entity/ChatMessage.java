@@ -1,5 +1,6 @@
 package com.trip.api.chatting.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -35,6 +36,7 @@ public class ChatMessage {
     @Column(name = "is_deleted", nullable = false)
     private Boolean isDeleted;
 
+    @Builder
     public ChatMessage(Long memberId, Long chatRoomId, String message, String messageType) {
         this.memberId = memberId;
         this.chatRoomId = chatRoomId;
