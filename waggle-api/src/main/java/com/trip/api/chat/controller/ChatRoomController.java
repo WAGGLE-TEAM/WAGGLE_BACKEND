@@ -1,5 +1,6 @@
 package com.trip.api.chat.controller;
 
+import com.trip.api.chat.dto.request.CreateChatMessageRequest;
 import com.trip.api.chat.dto.request.CreateChatRoomRequest;
 import com.trip.api.chat.dto.response.GetMyChatRoomResponse;
 import com.trip.api.chat.service.ChatRoomService;
@@ -51,5 +52,13 @@ public class ChatRoomController {
     public ResponseEntity<Void> enterToChatRoom(@PathVariable Long chatRoomId) {
         chatRoomService.enterToChatRoom(71L, chatRoomId);
         return ResponseEntity.created(URI.create("/chat" + chatRoomId)).build();
+    }
+
+    @PostMapping("/message/{chatRoomId}")
+    public ResponseEntity<CreateChatMessageRequest> sendMessage(
+        @PathVariable Long chatRoomId,
+        @Valid @RequestBody CreateChatMessageRequest createChatMessageRequest
+    ) {
+        return ResponseEntity.ok().body(createChatMessageRequest);
     }
 }

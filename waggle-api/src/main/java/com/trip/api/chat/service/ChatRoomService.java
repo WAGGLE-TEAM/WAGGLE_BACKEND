@@ -1,5 +1,6 @@
 package com.trip.api.chat.service;
 
+import com.trip.api.chat.dto.request.CreateChatMessageRequest;
 import com.trip.api.chat.dto.request.CreateChatRoomRequest;
 import com.trip.api.chat.dto.response.GetMyChatRoomResponse;
 import com.trip.api.chat.entity.ChatRoom;
@@ -60,5 +61,9 @@ public class ChatRoomService {
         if (chatRoom != null) {
             chatRoomMemberRepository.save(new ChatRoomMember(memberId, chatRoomId));
         }
+    }
+
+    public void sendMessage(Long memberId, Long chatRoomId, CreateChatMessageRequest createChatMessageRequest) {
+
     }
 }
