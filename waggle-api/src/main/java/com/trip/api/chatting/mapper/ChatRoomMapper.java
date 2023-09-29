@@ -1,7 +1,7 @@
-package com.trip.api.chat.mapper;
+package com.trip.api.chatting.mapper;
 
-import com.trip.api.chat.dto.request.CreateChatRoomRequest;
-import com.trip.api.chat.entity.ChatRoom;
+import com.trip.api.chatting.dto.request.CreateChatRoomRequest;
+import com.trip.api.chatting.entity.ChatRoom;
 
 import org.springframework.stereotype.Component;
 

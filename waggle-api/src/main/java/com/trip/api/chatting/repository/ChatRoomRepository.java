@@ -1,6 +1,6 @@
-package com.trip.api.chat.repository;
+package com.trip.api.chatting.repository;
 
-import com.trip.api.chat.entity.ChatRoom;
+import com.trip.api.chatting.entity.ChatRoom;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

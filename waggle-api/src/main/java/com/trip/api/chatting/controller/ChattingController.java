@@ -1,9 +1,8 @@
-package com.trip.api.chat.controller;
+package com.trip.api.chatting.controller;
 
-import com.trip.api.chat.dto.request.CreateChatMessageRequest;
-import com.trip.api.chat.dto.request.CreateChatRoomRequest;
-import com.trip.api.chat.dto.response.GetMyChatRoomResponse;
-import com.trip.api.chat.service.ChatRoomService;
+import com.trip.api.chatting.dto.request.CreateChatRoomRequest;
+import com.trip.api.chatting.dto.response.GetMyChatRoomResponse;
+import com.trip.api.chatting.service.ChattingService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,9 +18,9 @@ import java.util.List;
 @RequestMapping("/chat")
 @RequiredArgsConstructor
 @RestController
-public class ChatRoomController {
+public class ChattingController {
 
-    private final ChatRoomService chatRoomService;
+    private final ChattingService chatRoomService;
 
     @PostMapping
     public ResponseEntity<Void> createChatRoom(@Valid @RequestBody CreateChatRoomRequest chatRoomRequest) {
@@ -52,13 +51,5 @@ public class ChatRoomController {
     public ResponseEntity<Void> enterToChatRoom(@PathVariable Long chatRoomId) {
         chatRoomService.enterToChatRoom(71L, chatRoomId);
         return ResponseEntity.created(URI.create("/chat" + chatRoomId)).build();
-    }
-
-    @PostMapping("/message/{chatRoomId}")
-    public ResponseEntity<CreateChatMessageRequest> sendMessage(
-        @PathVariable Long chatRoomId,
-        @Valid @RequestBody CreateChatMessageRequest createChatMessageRequest
-    ) {
-        return ResponseEntity.ok().body(createChatMessageRequest);
     }
 }

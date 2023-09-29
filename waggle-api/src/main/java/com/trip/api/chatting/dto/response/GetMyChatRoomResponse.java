@@ -1,4 +1,4 @@
-package com.trip.api.chat.dto.response;
+package com.trip.api.chatting.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

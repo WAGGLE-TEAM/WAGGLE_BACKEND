@@ -1,6 +1,6 @@
-package com.trip.api.chat.entity;
+package com.trip.api.chatting.entity;
 
-import com.trip.api.chat.dto.embedded.ChatRoomMemberKey;
+import com.trip.api.chatting.dto.entitykey.ChatRoomMemberKey;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

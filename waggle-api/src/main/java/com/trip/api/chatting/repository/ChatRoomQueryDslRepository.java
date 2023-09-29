@@ -1,11 +1,11 @@
-package com.trip.api.chat.repository;
+package com.trip.api.chatting.repository;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
-import com.trip.api.chat.dto.response.GetMyChatRoomResponse;
-import com.trip.api.chat.entity.QChatRoom;
-import com.trip.api.chat.entity.QChatRoomMember;
+import com.trip.api.chatting.dto.response.GetMyChatRoomResponse;
+import com.trip.api.chatting.entity.QChatRoom;
+import com.trip.api.chatting.entity.QChatRoomMember;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

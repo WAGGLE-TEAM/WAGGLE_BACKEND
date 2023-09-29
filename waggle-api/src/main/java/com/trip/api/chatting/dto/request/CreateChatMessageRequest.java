@@ -1,4 +1,4 @@
-package com.trip.api.chat.dto.request;
+package com.trip.api.chatting.dto.request;
 
 import com.trip.api.config.ValidateType;
 import com.trip.api.dto.MessageType;

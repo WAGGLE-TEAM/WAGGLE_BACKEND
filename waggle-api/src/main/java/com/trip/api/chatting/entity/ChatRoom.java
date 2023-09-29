@@ -1,4 +1,4 @@
-package com.trip.api.chat.entity;
+package com.trip.api.chatting.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

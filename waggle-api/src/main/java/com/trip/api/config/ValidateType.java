@@ -14,7 +14,7 @@ import static java.lang.annotation.ElementType.*;
  */
 @Documented
 // 해당 어노테이션은 메소드, 필드, 파라미터에 적용할 수 있다.
-@Target({METHOD, FIELD, PARAMETER })
+@Target({ METHOD, FIELD, PARAMETER })
 // 어노테이션을 런타임까지 유지한다.
 @Retention(RetentionPolicy.RUNTIME)
 // 해당 어노테이션이 실행할 ConstraintValidator 구현체를 지정한다.

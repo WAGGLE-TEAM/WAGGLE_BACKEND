@@ -1,4 +1,4 @@
-package com.trip.api.chat.dto.request;
+package com.trip.api.chatting.dto.request;
 
 import lombok.Getter;
 

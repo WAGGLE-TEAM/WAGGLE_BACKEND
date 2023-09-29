@@ -1,4 +1,4 @@
-package com.trip.api.chat.dto.embedded;
+package com.trip.api.chatting.dto.entitykey;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

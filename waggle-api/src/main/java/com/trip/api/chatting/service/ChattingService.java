@@ -1,15 +1,14 @@
-package com.trip.api.chat.service;
+package com.trip.api.chatting.service;
 
-import com.trip.api.chat.dto.request.CreateChatMessageRequest;
-import com.trip.api.chat.dto.request.CreateChatRoomRequest;
-import com.trip.api.chat.dto.response.GetMyChatRoomResponse;
-import com.trip.api.chat.entity.ChatRoom;
-import com.trip.api.chat.entity.ChatRoomMember;
-import com.trip.api.chat.mapper.ChatRoomMapper;
-import com.trip.api.chat.repository.ChatRoomMemberDao;
-import com.trip.api.chat.repository.ChatRoomMemberRepository;
-import com.trip.api.chat.repository.ChatRoomQueryDslRepository;
-import com.trip.api.chat.repository.ChatRoomRepository;
+import com.trip.api.chatting.dto.request.CreateChatRoomRequest;
+import com.trip.api.chatting.dto.response.GetMyChatRoomResponse;
+import com.trip.api.chatting.entity.ChatRoom;
+import com.trip.api.chatting.entity.ChatRoomMember;
+import com.trip.api.chatting.mapper.ChatRoomMapper;
+import com.trip.api.chatting.repository.ChatRoomMemberDao;
+import com.trip.api.chatting.repository.ChatRoomMemberRepository;
+import com.trip.api.chatting.repository.ChatRoomQueryDslRepository;
+import com.trip.api.chatting.repository.ChatRoomRepository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class ChatRoomService {
+public class ChattingService {
 
     private final ChatRoomRepository chatRoomRepository;
     private final ChatRoomMemberRepository chatRoomMemberRepository;
@@ -61,9 +60,5 @@ public class ChatRoomService {
         if (chatRoom != null) {
             chatRoomMemberRepository.save(new ChatRoomMember(memberId, chatRoomId));
         }
-    }
-
-    public void sendMessage(Long memberId, Long chatRoomId, CreateChatMessageRequest createChatMessageRequest) {
-
     }
 }

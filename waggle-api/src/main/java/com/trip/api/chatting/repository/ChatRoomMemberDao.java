@@ -1,4 +1,4 @@
-package com.trip.api.chat.repository;
+package com.trip.api.chatting.repository;
 
 import lombok.RequiredArgsConstructor;
 
