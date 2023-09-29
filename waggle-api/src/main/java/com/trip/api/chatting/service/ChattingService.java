@@ -1,14 +1,13 @@
 package com.trip.api.chatting.service;
 
+import com.trip.api.chatting.dto.request.CreateChatMessageRequest;
 import com.trip.api.chatting.dto.request.CreateChatRoomRequest;
 import com.trip.api.chatting.dto.response.GetMyChatRoomResponse;
+import com.trip.api.chatting.entity.ChatMessage;
 import com.trip.api.chatting.entity.ChatRoom;
 import com.trip.api.chatting.entity.ChatRoomMember;
 import com.trip.api.chatting.mapper.ChatRoomMapper;
-import com.trip.api.chatting.repository.ChatRoomMemberDao;
-import com.trip.api.chatting.repository.ChatRoomMemberRepository;
-import com.trip.api.chatting.repository.ChatRoomQueryDslRepository;
-import com.trip.api.chatting.repository.ChatRoomRepository;
+import com.trip.api.chatting.repository.*;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,12 +24,13 @@ public class ChattingService {
     private final ChatRoomRepository chatRoomRepository;
     private final ChatRoomMemberRepository chatRoomMemberRepository;
     private final ChatRoomQueryDslRepository chatRoomQueryDslRepository;
+    private final ChatMessageRepository chatMessageRepository;
     private final ChatRoomMemberDao chatRoomMemberDao;
     private final ChatRoomMapper chatRoomMapper;
 
     @Transactional
     public Long createChatRoom(CreateChatRoomRequest chatRoomRequest) {
-        ChatRoom chatRoom = chatRoomMapper.convertCreateChatRoomRequestDtoToEntity(chatRoomRequest);
+        ChatRoom chatRoom = chatRoomMapper.convertCreateChatRoomReqDtoToEntity(chatRoomRequest);
         List<Long> joinUsers = chatRoomRequest.getJoinUsers();
         Long chatRoomId = chatRoomRepository.save(chatRoom).getId();
         chatRoomMemberDao.saveAllChatMembers(joinUsers, chatRoomId);
@@ -60,5 +60,11 @@ public class ChattingService {
         if (chatRoom != null) {
             chatRoomMemberRepository.save(new ChatRoomMember(memberId, chatRoomId));
         }
+    }
+
+    public Long sendMessage(Long memberId, Long chatRoomId, CreateChatMessageRequest chatMessageRequest) {
+        Optional<ChatRoom> chatRoom = chatRoomRepository.findById(chatRoomId);
+        ChatMessage chatMessage = chatRoomMapper.convertCreateChatMessageReqDtoToEntity(memberId, chatRoomId, chatMessageRequest);
+        return chatMessageRepository.save(chatMessage).getId();
     }
 }

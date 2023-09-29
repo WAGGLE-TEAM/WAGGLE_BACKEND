@@ -29,6 +29,17 @@ public class ChatMessage {
     @NotBlank
     private String message;
 
+    @Column(name = "message_type", nullable = false)
+    private String messageType;
+
     @Column(name = "is_deleted", nullable = false)
     private Boolean isDeleted;
+
+    public ChatMessage(Long memberId, Long chatRoomId, String message, String messageType) {
+        this.memberId = memberId;
+        this.chatRoomId = chatRoomId;
+        this.message = message;
+        this.messageType = messageType;
+        this.isDeleted = false;
+    }
 }

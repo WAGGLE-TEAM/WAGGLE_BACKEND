@@ -1,5 +1,6 @@
 package com.trip.api.chatting.controller;
 
+import com.trip.api.chatting.dto.request.CreateChatMessageRequest;
 import com.trip.api.chatting.dto.request.CreateChatRoomRequest;
 import com.trip.api.chatting.dto.response.GetMyChatRoomResponse;
 import com.trip.api.chatting.service.ChattingService;
@@ -50,6 +51,16 @@ public class ChattingController {
     @PostMapping("/{chatRoomId}")
     public ResponseEntity<Void> enterToChatRoom(@PathVariable Long chatRoomId) {
         chatRoomService.enterToChatRoom(71L, chatRoomId);
-        return ResponseEntity.created(URI.create("/chat" + chatRoomId)).build();
+        return ResponseEntity.created(URI.create("/chat/" + chatRoomId)).build();
+    }
+
+    // TODO: 이미지 전송 처리
+    @PostMapping("/message/{chatRoomId}")
+    public ResponseEntity<Void> sendMessage(
+        @PathVariable Long chatRoomId,
+        @Valid @RequestBody CreateChatMessageRequest chatMessageRequest
+    ) {
+        Long messageId = chatRoomService.sendMessage(71L, chatRoomId, chatMessageRequest);
+        return ResponseEntity.created(URI.create("/chat/message/" + chatRoomId + "/" + messageId)).build();
     }
 }
