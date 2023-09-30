@@ -1,8 +1,8 @@
 package com.trip.api.type;
 
 public enum MessageType {
-    N("공지사항"),
-    M("일반 메세지");
+    N("NOTIFICATION_TYPE"),
+    M("MESSAGE_TYPE");
 
     String type;
 
