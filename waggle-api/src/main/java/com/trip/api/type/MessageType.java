@@ -1,8 +1,8 @@
-package com.trip.api.dto;
+package com.trip.api.type;
 
 public enum MessageType {
-    N("N"),
-    M("M");
+    N("공지사항"),
+    M("일반 메세지");
 
     String type;
 

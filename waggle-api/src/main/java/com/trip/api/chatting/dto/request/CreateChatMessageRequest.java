@@ -1,7 +1,7 @@
 package com.trip.api.chatting.dto.request;
 
 import com.trip.api.config.ValidateType;
-import com.trip.api.dto.MessageType;
+import com.trip.api.type.MessageType;
 import lombok.Getter;
 
 import javax.validation.constraints.NotBlank;
