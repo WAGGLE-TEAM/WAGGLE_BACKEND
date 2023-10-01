@@ -2,7 +2,6 @@ package com.trip.api.chatting.service;
 
 import com.trip.api.chatting.dto.param.ConvertChatMessageParameter;
 import com.trip.api.chatting.dto.param.SendMessageParameter;
-import com.trip.api.chatting.dto.request.CreateChatMessageRequest;
 import com.trip.api.chatting.dto.request.CreateChatRoomRequest;
 import com.trip.api.chatting.dto.response.GetMyChatRoomResponse;
 import com.trip.api.chatting.entity.ChatMessage;
@@ -12,9 +11,9 @@ import com.trip.api.chatting.mapper.ChattingMapper;
 import com.trip.api.chatting.repository.*;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -40,38 +39,33 @@ public class ChattingService {
         return chatRoomId;
     }
 
-    // TODO: 예외 처리
     public void deleteChatRoom(Long chatRoomId) {
-        Optional<ChatRoom> chatRoom = chatRoomRepository.findById(chatRoomId);
-        chatRoomRepository.deleteById(chatRoom.get().getId());
+        ChatRoom chatRoom = chatRoomRepository.findById(chatRoomId).orElseThrow();
+        chatRoomRepository.deleteById(chatRoom.getId());
     }
 
-    // TODO: 예외 처리
     @Transactional
     public void exitChatRoom(Long chatRoomId, Long memberId) {
-        Optional<ChatRoom> chatRoom = chatRoomRepository.findById(chatRoomId);
-        chatRoomMemberRepository.deleteChatRoomMember(chatRoom.get().getId(), memberId);
+        ChatRoom chatRoom = chatRoomRepository.findById(chatRoomId).orElseThrow();
+        chatRoomMemberRepository.deleteChatRoomMember(chatRoom.getId(), memberId);
     }
 
+    @Transactional(readOnly = true)
     public List<GetMyChatRoomResponse> getMyChatRooms(Long memberId) {
         return chatRoomQueryDslRepository.findAllMyChatRoom(memberId);
     }
 
-    // TODO: 예외 처리
     public void enterToChatRoom(Long memberId, Long chatRoomId) {
-        Long chatRoom = chatRoomRepository.findChatRoomById(chatRoomId);
-
-        if (chatRoom != null) {
-            chatRoomMemberRepository.save(new ChatRoomMember(memberId, chatRoomId));
-        }
+        Long roomId = chatRoomRepository.findChatRoomById(chatRoomId).orElseThrow();
+        chatRoomMemberRepository.save(new ChatRoomMember(memberId, roomId));
     }
 
     public Long sendMessage(SendMessageParameter parameter) {
-        Optional<ChatRoom> chatRoom = chatRoomRepository.findById(parameter.getChatRoomId());
+        ChatRoom chatRoom = chatRoomRepository.findById(parameter.getChatRoomId()).orElseThrow();
         ChatMessage chatMessage = chattingMapper.convertCreateChatMessageReqDtoToEntity(
             new ConvertChatMessageParameter(
                 parameter.getMemberId(),
-                chatRoom.get().getId(),
+                chatRoom.getId(),
                 parameter.getChatMessageRequest()
             )
         );

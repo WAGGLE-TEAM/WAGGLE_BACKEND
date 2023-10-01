@@ -1,7 +1,6 @@
 package com.trip.api.chatting.mapper;
 
 import com.trip.api.chatting.dto.param.ConvertChatMessageParameter;
-import com.trip.api.chatting.dto.request.CreateChatMessageRequest;
 import com.trip.api.chatting.dto.request.CreateChatRoomRequest;
 import com.trip.api.chatting.entity.ChatMessage;
 import com.trip.api.chatting.entity.ChatRoom;
