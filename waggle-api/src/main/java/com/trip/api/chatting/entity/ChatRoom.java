@@ -1,5 +1,6 @@
 package com.trip.api.chatting.entity;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Getter
 @Table(name = "chat_room")
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SQLDelete(sql = "UPDATE chat_room SET is_deleted = true WHERE id = ?")
 public class ChatRoom {
 

@@ -2,6 +2,7 @@ package com.trip.api.chatting.entity;
 
 import com.trip.api.chatting.dto.entitykey.ChatRoomMemberKey;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Table(name = "chat_room_member")
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SQLDelete(sql = "UPDATE chat_room_member SET is_deleted = true WHERE id = ?")
 public class ChatRoomMember {
 
