@@ -1,10 +1,11 @@
-package com.trip.api.chat.dto.embedded;
+package com.trip.api.chatting.dto.entitykey;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
+
 import java.io.Serializable;
 
 @Embeddable
