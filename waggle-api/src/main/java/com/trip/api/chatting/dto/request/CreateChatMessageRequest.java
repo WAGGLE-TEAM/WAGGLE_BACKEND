@@ -12,6 +12,5 @@ public class CreateChatMessageRequest {
     @NotBlank
     private String message;
 
-    @ValidateType(enumClass = MessageType.class)
-    private String messageType;
+    private MessageType messageType;
 }
