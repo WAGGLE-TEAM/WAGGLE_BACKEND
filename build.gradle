@@ -4,11 +4,11 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
     id 'org.asciidoctor.jvm.convert' version '3.3.2'
     id 'application'
+    id 'jacoco'
 }
 
 group = 'com.trip'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
 
 repositories {
     mavenCentral()
@@ -27,11 +27,16 @@ application {
     mainClass = 'com.trip.api'
 }
 
+jacoco {
+    toolVersion = '0.8.5'
+}
+
 subprojects {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'org.asciidoctor.jvm.convert'
+    apply plugin: 'jacoco'
 
     sourceCompatibility = '11'
     targetCompatibility = '11'
@@ -54,10 +59,12 @@ subprojects {
     dependencies {
         // Spring Boot
         implementation 'org.springframework.boot:spring-boot-starter-web'
-        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-        implementation 'org.springframework.boot:spring-boot-starter-jdbc'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+        // JPA
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        runtimeOnly 'org.postgresql:postgresql'
 
         // lombok
         compileOnly 'org.projectlombok:lombok'
@@ -105,5 +112,37 @@ subprojects {
     test {
         useJUnitPlatform()
         outputs.dir snippetsDir
+        finalizedBy 'jacocoTestReport'
+    }
+
+    jacocoTestReport {
+        reports {
+            html.required = true
+            xml.required = false
+            csv.required = true
+        }
+        finalizedBy 'jacocoTestCoverageVerification'
+    }
+
+    jacocoTestCoverageVerification {
+        violationRules {
+            rule {
+                element = 'CLASS'
+
+                limit {
+                    counter = 'BRANCH'
+                    value = 'COVEREDRATIO'
+                    minimum = 0.70
+                }
+
+                limit {
+                    counter = 'METHOD'
+                    value = 'COVEREDRATIO'
+                    minimum = 0.50
+                }
+
+                excludes = ["*.Q*"]
+            }
+        }
     }
 }

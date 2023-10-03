@@ -1,4 +1,4 @@
-package com.trip.api.config;
+package com.trip.tripinworld.global.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -10,10 +10,11 @@ import javax.persistence.EntityManager;
 @Configuration
 @RequiredArgsConstructor
 public class QueryDslConfig {
-    private final EntityManager entitymanager;
+
+    private final EntityManager entityManager;
 
     @Bean
     public JPAQueryFactory queryFactory() {
-        return new JPAQueryFactory(entitymanager);
+        return new JPAQueryFactory(entityManager);
     }
 }
