@@ -10,11 +10,19 @@
      docker-compose up -d --build
     ```
 
-    - If you already build docker-compose, please follow this command
+   - If you already build docker-compose, please follow this command
 
-        ```java
-        docker-compose up
-        ```
+       ```java
+       docker-compose up
+       ```
+
+
+
+**Windows Git Bash 사용 시 한번에 Build하는 방법**
+```
+sh .localbuild.sh
+```
+
 
 ## Project structure
 
