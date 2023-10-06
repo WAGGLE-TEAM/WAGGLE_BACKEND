@@ -56,7 +56,7 @@ public class ChattingService {
     }
 
     public void enterToChatRoom(Long memberId, Long chatRoomId) {
-        Long roomId = chatRoomRepository.findChatRoomById(chatRoomId).getAsLong();
+        Long roomId = chatRoomRepository.findChatRoomById(chatRoomId).orElseThrow();
         chatRoomMemberRepository.save(new ChatRoomMember(memberId, roomId));
     }
 

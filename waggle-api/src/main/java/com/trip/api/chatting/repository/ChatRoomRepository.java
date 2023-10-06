@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.OptionalLong;
+import java.util.Optional;
 
 @Repository
 public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
@@ -17,5 +17,5 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
                 "FROM chat_room " +
                 "WHERE id = :chatRoomId AND is_deleted = false"
     )
-    OptionalLong findChatRoomById(Long chatRoomId);
+    Optional<Long> findChatRoomById(Long chatRoomId);
 }

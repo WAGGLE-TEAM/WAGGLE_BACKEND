@@ -1,4 +1,4 @@
-package com.trip.api.type;
+package com.trip.common.type;
 
 public enum MessageType {
     N("NOTIFICATION_TYPE"),

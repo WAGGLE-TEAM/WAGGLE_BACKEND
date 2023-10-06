@@ -3,4 +3,6 @@ include 'waggle-common'
 include 'waggle-api'
 include 'waggle-scheduler'
 include 'waggle-admin'
+include 'waggle-common:common'
+findProject(':waggle-common:common')?.name = 'common'
 
