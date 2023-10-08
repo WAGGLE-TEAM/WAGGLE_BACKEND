@@ -1,6 +1,7 @@
 package com.trip.api.report.entity;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
@@ -36,6 +37,7 @@ public class ReportChatRoom {
     @ColumnDefault("false")
     private Boolean isSolved;
 
+    @Builder
     public ReportChatRoom(Long chatRoomId, Long writerId, Long reporterId, String reason) {
         this.chatRoomId = chatRoomId;
         this.writerId = writerId;

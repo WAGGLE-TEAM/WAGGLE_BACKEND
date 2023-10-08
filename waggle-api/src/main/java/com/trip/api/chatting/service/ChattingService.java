@@ -31,7 +31,7 @@ public class ChattingService {
 
     @Transactional
     public Long createChatRoom(CreateChatRoomRequest chatRoomRequest) {
-        ChatRoom chatRoom = chattingMapper.convertCreateChatRoomReqDtoToEntity(chatRoomRequest);
+        ChatRoom chatRoom = chattingMapper.createChatRoomRequestToEntity(chatRoomRequest);
         List<Long> joinUsers = chatRoomRequest.getJoinUsers();
         Long chatRoomId = chatRoomRepository.save(chatRoom).getId();
         chatRoomMemberDao.saveAllChatMembers(joinUsers, chatRoomId);
@@ -61,7 +61,7 @@ public class ChattingService {
 
     public Long sendMessage(SendMessageParameter parameter) {
         ChatRoom chatRoom = chatRoomRepository.findById(parameter.getChatRoomId()).orElseThrow();
-        ChatMessage chatMessage = chattingMapper.convertCreateChatMessageReqDtoToEntity(
+        ChatMessage chatMessage = chattingMapper.createChatMessageRequestToEntity(
             new ConvertChatMessageParameter(
                 parameter.getMemberId(),
                 chatRoom.getId(),

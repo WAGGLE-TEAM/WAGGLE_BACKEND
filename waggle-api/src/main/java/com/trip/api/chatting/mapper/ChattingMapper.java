@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class ChattingMapper {
 
-    public ChatRoom convertCreateChatRoomReqDtoToEntity(CreateChatRoomRequest request) {
+    public ChatRoom createChatRoomRequestToEntity(CreateChatRoomRequest request) {
         return new ChatRoom(request.getChatRoomName(), request.getChatRoomMaker());
     }
 
-    public ChatMessage convertCreateChatMessageReqDtoToEntity(ConvertChatMessageParameter parameter) {
+    public ChatMessage createChatMessageRequestToEntity(ConvertChatMessageParameter parameter) {
         return ChatMessage.builder()
             .memberId(parameter.getMemberId())
             .chatRoomId(parameter.getChatRoomId())
