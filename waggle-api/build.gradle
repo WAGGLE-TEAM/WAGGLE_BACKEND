@@ -18,6 +18,8 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api" // java.lang.NoClassDefFoundError (javax.annotation.Entity) 대응 코드
 
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    implementation project(':waggle-common')
 }
 
 tasks.named('test') {

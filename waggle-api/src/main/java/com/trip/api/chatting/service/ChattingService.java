@@ -1,6 +1,7 @@
 package com.trip.api.chatting.service;
 
 import com.trip.api.chatting.dto.param.ConvertChatMessageParameter;
+import com.trip.api.chatting.dto.param.DeleteMessageParameter;
 import com.trip.api.chatting.dto.param.SendMessageParameter;
 import com.trip.api.chatting.dto.request.CreateChatRoomRequest;
 import com.trip.api.chatting.dto.response.GetMyChatRoomResponse;
@@ -16,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -44,7 +44,6 @@ public class ChattingService {
         chatRoomRepository.deleteById(chatRoom.getId());
     }
 
-    @Transactional
     public void exitChatRoom(Long chatRoomId, Long memberId) {
         ChatRoom chatRoom = chatRoomRepository.findById(chatRoomId).orElseThrow();
         chatRoomMemberRepository.deleteChatRoomMember(chatRoom.getId(), memberId);
@@ -71,5 +70,12 @@ public class ChattingService {
         );
 
         return chatMessageRepository.save(chatMessage).getId();
+    }
+
+    public void deleteMessage(DeleteMessageParameter parameter) {
+        chatRoomRepository.findChatRoomById(parameter.getChatRoomId()).orElseThrow();
+        Long messageId = chatMessageRepository.findChatMessageById(parameter.getMessageId()).orElseThrow();
+
+        chatMessageRepository.deleteById(messageId);
     }
 }

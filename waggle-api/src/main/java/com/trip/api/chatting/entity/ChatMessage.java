@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
@@ -15,6 +17,7 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "chat_message")
+@DynamicInsert
 @SQLDelete(sql = "UPDATE chat_message SET is_deleted = true WHERE id = ?")
 public class ChatMessage {
 
@@ -34,7 +37,8 @@ public class ChatMessage {
     @Column(name = "message_type", nullable = false)
     private String messageType;
 
-    @Column(name = "is_deleted", nullable = false)
+    @Column(name = "is_deleted")
+    @ColumnDefault("false")
     private Boolean isDeleted;
 
     @Builder
@@ -43,6 +47,5 @@ public class ChatMessage {
         this.chatRoomId = chatRoomId;
         this.message = message;
         this.messageType = messageType;
-        this.isDeleted = false;
     }
 }

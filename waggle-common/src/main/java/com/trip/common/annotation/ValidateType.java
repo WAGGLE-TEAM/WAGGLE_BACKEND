@@ -1,4 +1,6 @@
-package com.trip.api.config;
+package com.trip.common.annotation;
+
+import com.trip.common.annotation.TypeValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
