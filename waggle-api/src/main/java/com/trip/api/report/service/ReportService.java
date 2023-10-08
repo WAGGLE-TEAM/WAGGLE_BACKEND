@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ReportService {
 
-    private ReportChatRoomRepository reportChatRoomRepository;
+    private final ReportChatRoomRepository reportChatRoomRepository;
 
     public Long createChatRoomReport(
         CreateChatRoomReportRequest chatRoomReportRequest,

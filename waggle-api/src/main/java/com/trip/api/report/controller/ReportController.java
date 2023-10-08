@@ -14,12 +14,12 @@ import java.net.URI;
 @RequestMapping("/report")
 public class ReportController {
 
-    private ReportService reportService;
+    private final ReportService reportService;
 
     @PostMapping("/chat/{chatRoomId}")
     public ResponseEntity<Void> createChatRoomReport(
-            @Valid @RequestBody CreateChatRoomReportRequest chatRoomReportRequest,
-            @PathVariable Long chatRoomId
+        @Valid @RequestBody CreateChatRoomReportRequest chatRoomReportRequest,
+        @PathVariable Long chatRoomId
     ) {
         Long reportId = reportService.createChatRoomReport(chatRoomReportRequest, 71L, chatRoomId);
         return ResponseEntity.created(URI.create("/report/chat/" + reportId)).build();
