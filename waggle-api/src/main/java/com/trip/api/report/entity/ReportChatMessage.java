@@ -1,6 +1,8 @@
 package com.trip.api.report.entity;
 
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
@@ -9,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Getter
 @DynamicInsert
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ReportChatMessage {
@@ -18,10 +21,13 @@ public class ReportChatMessage {
     private Long id;
 
     @Column(name = "chat_message_id", nullable = false)
-    private Long chatMessageId;
+    private Long messageId;
 
-    @Column(name = "member_id", nullable = false)
-    private Long memberId;
+    @Column(name = "writer_id", nullable = false)
+    private Long writerId;
+
+    @Column(name = "reporter_id", nullable = false)
+    private Long reporterId;
 
     @NotNull
     private String reason;
@@ -30,9 +36,11 @@ public class ReportChatMessage {
     @ColumnDefault("false")
     private Boolean isSolved;
 
-    public ReportChatMessage(Long chatMessageId, Long memberId, String reason) {
-        this.chatMessageId = chatMessageId;
-        this.memberId = memberId;
+    @Builder
+    public ReportChatMessage(Long messageId, Long writerId, Long reporterId, String reason) {
+        this.messageId = messageId;
+        this.writerId = writerId;
+        this.reporterId = reporterId;
         this.reason = reason;
     }
 }

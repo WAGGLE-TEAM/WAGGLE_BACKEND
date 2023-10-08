@@ -1,6 +1,6 @@
 package com.trip.api.report.controller;
 
-import com.trip.api.report.dto.request.CreateChatRoomReportRequest;
+import com.trip.api.report.dto.request.CreateReportRequest;
 import com.trip.api.report.service.ReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +18,26 @@ public class ReportController {
 
     @PostMapping("/chat/{chatRoomId}")
     public ResponseEntity<Void> createChatRoomReport(
-        @Valid @RequestBody CreateChatRoomReportRequest chatRoomReportRequest,
+        @Valid @RequestBody CreateReportRequest reportRequest,
         @PathVariable Long chatRoomId
     ) {
-        Long reportId = reportService.createChatRoomReport(chatRoomReportRequest, 71L, chatRoomId);
+        Long reportId = reportService.createChatRoomReport(reportRequest, 71L, chatRoomId);
         return ResponseEntity.created(URI.create("/report/chat/" + reportId)).build();
+    }
+
+    @PostMapping("/chat/{chatRoomId}/message/{messageId}")
+    public ResponseEntity<Void> createChatMessageUserReport(
+        @PathVariable Long chatRoomId,
+        @PathVariable Long messageId,
+        @Valid @RequestBody CreateReportRequest reportRequest
+    ) {
+        Long reportId = reportService.createChatMessageUserReport(
+            reportRequest,
+            chatRoomId,
+            messageId,
+            71L
+        );
+
+        return ResponseEntity.created(URI.create("/report/chat/" + chatRoomId + "/message/" + messageId + "/" + reportId)).build();
     }
 }

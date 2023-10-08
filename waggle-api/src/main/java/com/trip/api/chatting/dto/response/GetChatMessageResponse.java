@@ -1,6 +1,5 @@
 package com.trip.api.chatting.dto.response;
 
-import com.trip.common.type.MessageType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
