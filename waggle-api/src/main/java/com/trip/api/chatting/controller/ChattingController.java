@@ -58,13 +58,13 @@ public class ChattingController {
     }
 
     // TODO: 이미지 전송 처리
-    @PostMapping("/message/{chatRoomId}")
+    @PostMapping("/{chatRoomId}/message")
     public ResponseEntity<Void> sendMessage(
         @PathVariable Long chatRoomId,
         @Valid @RequestBody CreateChatMessageRequest chatMessageRequest
     ) {
         Long messageId = chattingService.sendMessage(new SendMessageParameter(71L, chatRoomId, chatMessageRequest));
-        return ResponseEntity.created(URI.create("/chat/message/" + chatRoomId + "/" + messageId)).build();
+        return ResponseEntity.created(URI.create("/chat/" + chatRoomId + "/message/" + messageId)).build();
     }
 
     @DeleteMapping("{chatRoomId}/message/{messageId}")
