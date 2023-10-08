@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -45,7 +44,6 @@ public class ChattingService {
         chatRoomRepository.deleteById(chatRoom.getId());
     }
 
-    @Transactional
     public void exitChatRoom(Long chatRoomId, Long memberId) {
         ChatRoom chatRoom = chatRoomRepository.findById(chatRoomId).orElseThrow();
         chatRoomMemberRepository.deleteChatRoomMember(chatRoom.getId(), memberId);
