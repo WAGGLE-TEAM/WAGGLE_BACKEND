@@ -1,9 +1,16 @@
 package com.trip.api.report.entity;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@DynamicInsert
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ReportChatMessage {
 
     @Id
@@ -19,13 +26,13 @@ public class ReportChatMessage {
     @NotNull
     private String reason;
 
-    @Column(name = "is_solved", nullable = false)
+    @Column(name = "is_solved")
+    @ColumnDefault("false")
     private Boolean isSolved;
 
     public ReportChatMessage(Long chatMessageId, Long memberId, String reason) {
         this.chatMessageId = chatMessageId;
         this.memberId = memberId;
         this.reason = reason;
-        this.isSolved = false;
     }
 }
