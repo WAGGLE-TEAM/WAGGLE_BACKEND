@@ -4,6 +4,7 @@ import com.trip.api.chatting.dto.param.ConvertChatMessageParameter;
 import com.trip.api.chatting.dto.param.DeleteMessageParameter;
 import com.trip.api.chatting.dto.param.SendMessageParameter;
 import com.trip.api.chatting.dto.request.CreateChatRoomRequest;
+import com.trip.api.chatting.dto.response.GetChatMessageResponse;
 import com.trip.api.chatting.dto.response.GetMyChatRoomResponse;
 import com.trip.api.chatting.entity.ChatMessage;
 import com.trip.api.chatting.entity.ChatRoom;
@@ -24,7 +25,7 @@ public class ChattingService {
 
     private final ChatRoomRepository chatRoomRepository;
     private final ChatRoomMemberRepository chatRoomMemberRepository;
-    private final ChatRoomQueryDslRepository chatRoomQueryDslRepository;
+    private final ChattingQueryDslRepository chattingQueryDslRepository;
     private final ChatMessageRepository chatMessageRepository;
     private final ChatRoomMemberDao chatRoomMemberDao;
     private final ChattingMapper chattingMapper;
@@ -51,7 +52,7 @@ public class ChattingService {
 
     @Transactional(readOnly = true)
     public List<GetMyChatRoomResponse> getMyChatRooms(Long memberId) {
-        return chatRoomQueryDslRepository.findAllMyChatRoom(memberId);
+        return chattingQueryDslRepository.findAllMyChatRoom(memberId);
     }
 
     public void enterToChatRoom(Long memberId, Long chatRoomId) {
@@ -77,5 +78,11 @@ public class ChattingService {
         Long messageId = chatMessageRepository.findChatMessageById(parameter.getMessageId()).orElseThrow();
 
         chatMessageRepository.deleteById(messageId);
+    }
+
+    @Transactional(readOnly = true)
+    public List<GetChatMessageResponse> getChatMessages(Long chatRoomId) {
+        Long roomId = chatRoomRepository.findChatRoomById(chatRoomId).orElseThrow();
+        return chattingQueryDslRepository.findAllChatMessage(roomId);
     }
 }
