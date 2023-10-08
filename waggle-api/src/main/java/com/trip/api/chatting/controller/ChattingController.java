@@ -1,5 +1,6 @@
 package com.trip.api.chatting.controller;
 
+import com.trip.api.chatting.dto.param.DeleteMessageParameter;
 import com.trip.api.chatting.dto.param.SendMessageParameter;
 import com.trip.api.chatting.dto.request.CreateChatMessageRequest;
 import com.trip.api.chatting.dto.request.CreateChatRoomRequest;
@@ -64,5 +65,11 @@ public class ChattingController {
     ) {
         Long messageId = chattingService.sendMessage(new SendMessageParameter(71L, chatRoomId, chatMessageRequest));
         return ResponseEntity.created(URI.create("/chat/message/" + chatRoomId + "/" + messageId)).build();
+    }
+
+    @DeleteMapping("{chatRoomId}/message/{messageId}")
+    public ResponseEntity<Void> deleteMessage(@PathVariable Long chatRoomId, @PathVariable Long messageId) {
+        chattingService.deleteMessage(new DeleteMessageParameter(chatRoomId, messageId, 71L));
+        return ResponseEntity.ok().build();
     }
 }

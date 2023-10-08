@@ -1,6 +1,7 @@
 package com.trip.api.chatting.service;
 
 import com.trip.api.chatting.dto.param.ConvertChatMessageParameter;
+import com.trip.api.chatting.dto.param.DeleteMessageParameter;
 import com.trip.api.chatting.dto.param.SendMessageParameter;
 import com.trip.api.chatting.dto.request.CreateChatRoomRequest;
 import com.trip.api.chatting.dto.response.GetMyChatRoomResponse;
@@ -71,5 +72,12 @@ public class ChattingService {
         );
 
         return chatMessageRepository.save(chatMessage).getId();
+    }
+
+    public void deleteMessage(DeleteMessageParameter parameter) {
+        chatRoomRepository.findChatRoomById(parameter.getChatRoomId()).orElseThrow();
+        Long messageId = chatMessageRepository.findChatMessageById(parameter.getMessageId()).orElseThrow();
+
+        chatMessageRepository.deleteById(messageId);
     }
 }
