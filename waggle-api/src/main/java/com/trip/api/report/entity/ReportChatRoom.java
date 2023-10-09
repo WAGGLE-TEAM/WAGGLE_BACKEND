@@ -24,8 +24,8 @@ public class ReportChatRoom {
     @Column(name = "chat_room_id", nullable = false)
     private Long chatRoomId;
 
-    @Column(name = "writer_id", nullable = false)
-    private Long writerId;
+    @Column(name = "creator_id", nullable = false)
+    private Long creatorId;
 
     @Column(name = "reporter_id", nullable = false)
     private Long reporterId;
@@ -38,9 +38,9 @@ public class ReportChatRoom {
     private Boolean isSolved;
 
     @Builder
-    public ReportChatRoom(Long chatRoomId, Long writerId, Long reporterId, String reason) {
+    public ReportChatRoom(Long chatRoomId, Long creatorId, Long reporterId, String reason) {
         this.chatRoomId = chatRoomId;
-        this.writerId = writerId;
+        this.creatorId = creatorId;
         this.reporterId = reporterId;
         this.reason = reason;
     }

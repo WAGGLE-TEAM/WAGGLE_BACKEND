@@ -1,5 +1,7 @@
 package com.trip.api.report.service;
 
+import com.trip.api.chatting.repository.ChatMessageRepository;
+import com.trip.api.chatting.repository.ChatRoomRepository;
 import com.trip.api.report.dto.param.ConvertChatRoomReportParameter;
 import com.trip.api.report.dto.request.CreateReportRequest;
 import com.trip.api.report.entity.ReportChatMessage;
@@ -18,6 +20,8 @@ public class ReportService {
 
     private final ReportChatRoomRepository reportChatRoomRepository;
     private final ReportChatMessageRepository reportChatMessageRepository;
+    private final ChatRoomRepository chatRoomRepository;
+    private final ChatMessageRepository chatMessageRepository;
     private final ReportMapper reportMapper;
 
     public Long createChatRoomReport(
@@ -25,9 +29,11 @@ public class ReportService {
         Long reporterId,
         Long chatRoomId
     ) {
-        Long writerId = 10L;
+        Long creatorId = 10L;
+        chatRoomRepository.findChatRoomById(chatRoomId).orElseThrow();
+
         ReportChatRoom reportChatRoom = reportMapper.createReportRequestToReportChatRoomEntity(
-            new ConvertChatRoomReportParameter(chatRoomId, writerId, reporterId, reportRequest.getReason())
+            new ConvertChatRoomReportParameter(chatRoomId, creatorId, reporterId, reportRequest.getReason())
         );
 
         return reportChatRoomRepository.save(reportChatRoom).getId();
@@ -40,6 +46,9 @@ public class ReportService {
         Long reporterId
     ) {
         Long writerId = 55L;
+        chatRoomRepository.findChatRoomById(chatRoomId).orElseThrow();
+        chatMessageRepository.findChatMessageById(messageId).orElseThrow();
+
         ReportChatMessage reportChatMessage = reportMapper.createReportRequestToReportChatMessageEntity(
             messageId, reporterId, writerId, reportRequest.getReason()
         );
