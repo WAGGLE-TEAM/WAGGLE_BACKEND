@@ -18,4 +18,13 @@ public interface ChatRoomMemberRepository extends JpaRepository<ChatRoomMember, 
                     "WHERE chat_room_id = :chatRoomId AND member_id = :memberId"
     )
     void deleteChatRoomMember(Long chatRoomId, Long memberId);
+
+    @Modifying
+    @Query(
+            nativeQuery = true,
+            value = "UPDATE chat_room_member " +
+                    "SET is_exited = true " +
+                    "WHERE chat_room_id = :chatRoomId"
+    )
+    void deleteAllByChatRoomId(Long chatRoomId);
 }

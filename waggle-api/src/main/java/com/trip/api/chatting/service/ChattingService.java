@@ -40,9 +40,12 @@ public class ChattingService {
         return chatRoomId;
     }
 
+    @Transactional
     public void deleteChatRoom(Long chatRoomId) {
         ChatRoom chatRoom = chatRoomRepository.findById(chatRoomId).orElseThrow();
         chatRoomRepository.deleteById(chatRoom.getId());
+        chatMessageRepository.deleteAllByChatRoomId(chatRoom.getId());
+        chatRoomMemberRepository.deleteAllByChatRoomId(chatRoom.getId());
     }
 
     public void exitChatRoom(Long chatRoomId, Long memberId) {
