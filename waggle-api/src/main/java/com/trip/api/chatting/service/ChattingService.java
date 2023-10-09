@@ -48,6 +48,7 @@ public class ChattingService {
         chatRoomMemberRepository.deleteAllByChatRoomId(chatRoom.getId());
     }
 
+    @Transactional
     public void exitChatRoom(Long chatRoomId, Long memberId) {
         ChatRoom chatRoom = chatRoomRepository.findById(chatRoomId).orElseThrow();
         chatRoomMemberRepository.deleteChatRoomMember(chatRoom.getId(), memberId);
