@@ -61,7 +61,10 @@ public class ChattingService {
 
     public void enterToChatRoom(Long memberId, Long chatRoomId) {
         Long roomId = chatRoomRepository.findChatRoomById(chatRoomId).orElseThrow();
-        chatRoomMemberRepository.save(new ChatRoomMember(memberId, roomId));
+        ChatRoomMember chatRoomMember = chatRoomMemberRepository.findChatRoomMemberByMemberId(roomId, memberId)
+            .orElseGet(() -> new ChatRoomMember(memberId, chatRoomId));
+        chatRoomMember.updateStatus();
+        chatRoomMemberRepository.save(chatRoomMember);
     }
 
     public Long sendMessage(SendMessageParameter parameter) {

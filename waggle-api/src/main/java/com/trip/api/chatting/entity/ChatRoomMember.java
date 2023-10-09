@@ -30,4 +30,12 @@ public class ChatRoomMember {
     public ChatRoomMember(Long memberId, Long chatRoomId) {
         this.id = new ChatRoomMemberKey(chatRoomId, memberId);
     }
+
+    public void updateStatus() {
+        if (this.isExited == null) {
+            this.isExited = false;
+        } else {
+            this.isExited = !this.isExited;
+        }
+    }
 }
