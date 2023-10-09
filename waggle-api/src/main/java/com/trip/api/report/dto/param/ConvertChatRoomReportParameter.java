@@ -8,7 +8,7 @@ import lombok.Getter;
 public class ConvertChatRoomReportParameter {
 
     private final Long chatRoomId;
-    private final Long writerId;
+    private final Long creatorId;
     private final Long reporterId;
     private final String reason;
 }

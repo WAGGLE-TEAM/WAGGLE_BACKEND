@@ -12,7 +12,7 @@ public class ReportMapper {
     public ReportChatRoom createReportRequestToReportChatRoomEntity(ConvertChatRoomReportParameter parameter) {
         return ReportChatRoom.builder()
             .chatRoomId(parameter.getChatRoomId())
-            .writerId(parameter.getWriterId())
+            .creatorId(parameter.getCreatorId())
             .reporterId(parameter.getReporterId())
             .reason(parameter.getReason())
             .build();
