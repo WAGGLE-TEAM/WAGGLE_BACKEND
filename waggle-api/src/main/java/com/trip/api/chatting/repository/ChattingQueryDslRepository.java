@@ -32,11 +32,12 @@ public class ChattingQueryDslRepository<T> {
                     qChatRoom.id.as("chatRoomId"),
                     qChatRoom.name.as("title")
                 )
-            )
+            ).distinct()
             .from(qChatRoom)
             .join(qChatRoomMember).on(qChatRoom.id.eq(qChatRoomMember.id.chatRoomId))
             .where(
-                qChatRoomMember.id.memberId.eq(memberId),
+                qChatRoomMember.id.memberId.eq(memberId)
+                    .or(qChatRoom.creator.eq(memberId)),
                 qChatRoomMember.isExited.eq(false),
                 qChatRoom.isDeleted.eq(false)
             )
