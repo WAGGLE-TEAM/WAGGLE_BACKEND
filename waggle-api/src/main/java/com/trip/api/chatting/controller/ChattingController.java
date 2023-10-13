@@ -4,6 +4,7 @@ import com.trip.api.chatting.dto.param.DeleteMessageParameter;
 import com.trip.api.chatting.dto.param.SendMessageParameter;
 import com.trip.api.chatting.dto.request.CreateChatMessageRequest;
 import com.trip.api.chatting.dto.request.CreateChatRoomRequest;
+import com.trip.api.chatting.dto.response.GetAllChatRoomResponse;
 import com.trip.api.chatting.dto.response.GetChatMessageResponse;
 import com.trip.api.chatting.dto.response.GetMyChatRoomResponse;
 import com.trip.api.chatting.service.ChattingService;
@@ -46,10 +47,10 @@ public class ChattingController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
+    @GetMapping("/my")
     public ResponseEntity<List<GetMyChatRoomResponse>> getMyChatRooms() {
         List<GetMyChatRoomResponse> result = chattingService.getMyChatRooms(71L);
-        return ResponseEntity.ok().body(result);
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping("/{chatRoomId}")
@@ -77,6 +78,12 @@ public class ChattingController {
     @GetMapping("/{chatRoomId}")
     public ResponseEntity<List<GetChatMessageResponse>> getDetailChatRoom(@PathVariable Long chatRoomId) {
         List<GetChatMessageResponse> result = chattingService.getChatMessages(chatRoomId);
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<GetAllChatRoomResponse>> getAllChatRoom() {
+        List<GetAllChatRoomResponse> result = chattingService.getAllChatRoom();
         return ResponseEntity.ok(result);
     }
 }

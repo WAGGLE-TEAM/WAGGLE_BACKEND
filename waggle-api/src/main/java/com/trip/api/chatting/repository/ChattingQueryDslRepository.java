@@ -3,6 +3,7 @@ package com.trip.api.chatting.repository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
+import com.trip.api.chatting.dto.response.GetAllChatRoomResponse;
 import com.trip.api.chatting.dto.response.GetChatMessageResponse;
 import com.trip.api.chatting.dto.response.GetMyChatRoomResponse;
 import com.trip.api.chatting.entity.QChatMessage;
@@ -59,6 +60,21 @@ public class ChattingQueryDslRepository<T> {
             .from(qChatMessage)
             .join(qChatRoom).on(qChatRoom.id.eq(qChatMessage.chatRoomId))
             .where(qChatMessage.isDeleted.eq(false))
+            .fetch();
+    }
+
+    // TODO: 내가 속한 채팅방도 보여줄 것인지 확인
+    public List<GetAllChatRoomResponse> findAllChatRoom() {
+        return jpaQueryFactory
+            .select(
+                Projections.constructor(
+                    GetAllChatRoomResponse.class,
+                    qChatRoom.id.as("chatRoomId"),
+                    qChatRoom.name.as("title")
+                )
+            )
+            .from(qChatRoom)
+            .where(qChatRoom.isDeleted.eq(false))
             .fetch();
     }
 }
