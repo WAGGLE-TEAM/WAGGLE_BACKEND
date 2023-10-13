@@ -1,6 +1,7 @@
 package com.trip.api.report.dto.param;
 
 import com.trip.api.report.dto.request.CreateReportRequest;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

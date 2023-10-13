@@ -6,7 +6,6 @@ import com.trip.api.report.dto.param.ConvertChatMessageReportParameter;
 import com.trip.api.report.dto.param.ConvertChatRoomReportParameter;
 import com.trip.api.report.dto.param.CreateChatMessageReportParameter;
 import com.trip.api.report.dto.param.CreateChatRoomReportParameter;
-import com.trip.api.report.dto.request.CreateReportRequest;
 import com.trip.api.report.entity.ReportChatMessage;
 import com.trip.api.report.entity.ReportChatRoom;
 import com.trip.api.report.mapper.ReportMapper;
