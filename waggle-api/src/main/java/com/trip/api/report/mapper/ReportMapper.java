@@ -1,5 +1,6 @@
 package com.trip.api.report.mapper;
 
+import com.trip.api.report.dto.param.ConvertChatMessageReportParameter;
 import com.trip.api.report.dto.param.ConvertChatRoomReportParameter;
 import com.trip.api.report.entity.ReportChatMessage;
 import com.trip.api.report.entity.ReportChatRoom;
@@ -18,17 +19,12 @@ public class ReportMapper {
             .build();
     }
 
-    public ReportChatMessage createReportRequestToReportChatMessageEntity(
-        Long messageId,
-        Long reporterId,
-        Long writerId,
-        String reason
-    ) {
+    public ReportChatMessage createReportRequestToReportChatMessageEntity(ConvertChatMessageReportParameter parameter) {
         return ReportChatMessage.builder()
-            .messageId(messageId)
-            .reporterId(reporterId)
-            .writerId(writerId)
-            .reason(reason)
+            .messageId(parameter.getMessageId())
+            .reporterId(parameter.getReporterId())
+            .writerId(parameter.getWriterId())
+            .reason(parameter.getReason())
             .build();
     }
 }

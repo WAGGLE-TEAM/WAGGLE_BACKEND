@@ -1,5 +1,6 @@
 package com.trip.api.report.controller;
 
+import com.trip.api.report.dto.param.CreateChatMessageReportParameter;
 import com.trip.api.report.dto.param.CreateChatRoomReportParameter;
 import com.trip.api.report.dto.request.CreateReportRequest;
 import com.trip.api.report.service.ReportService;
@@ -39,10 +40,12 @@ public class ReportController {
         @Valid @RequestBody CreateReportRequest reportRequest
     ) {
         Long reportId = reportService.createChatMessageUserReport(
-            reportRequest,
-            chatRoomId,
-            messageId,
-            71L
+            new CreateChatMessageReportParameter(
+                reportRequest,
+                chatRoomId,
+                messageId,
+                71L
+            )
         );
 
         return ResponseEntity.created(URI.create("/report/chat/" + chatRoomId + "/message/" + messageId + "/" + reportId)).build();
