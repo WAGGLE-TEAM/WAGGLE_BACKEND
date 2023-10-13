@@ -4,9 +4,7 @@ import com.trip.api.chatting.dto.param.ConvertChatMessageParameter;
 import com.trip.api.chatting.dto.param.DeleteMessageParameter;
 import com.trip.api.chatting.dto.param.SendMessageParameter;
 import com.trip.api.chatting.dto.request.CreateChatRoomRequest;
-import com.trip.api.chatting.dto.response.GetAllChatRoomResponse;
-import com.trip.api.chatting.dto.response.GetChatMessageResponse;
-import com.trip.api.chatting.dto.response.GetMyChatRoomResponse;
+import com.trip.api.chatting.dto.response.*;
 import com.trip.api.chatting.entity.ChatMessage;
 import com.trip.api.chatting.entity.ChatRoom;
 import com.trip.api.chatting.entity.ChatRoomMember;
@@ -97,5 +95,13 @@ public class ChattingService {
     @Transactional(readOnly = true)
     public List<GetAllChatRoomResponse> getAllChatRoom() {
         return chattingQueryDslRepository.findAllChatRoom();
+    }
+
+    @Transactional(readOnly = true)
+    public GetAllChatRoomMemberResponse getAllChatRoomMember(Long chatRoomId) {
+        Long creatorId = chatRoomRepository.findCreatorById(chatRoomId).orElseThrow();
+        List<GetAllChatMember> members = chattingQueryDslRepository.findAllChatRoomMember(chatRoomId);
+
+        return new GetAllChatRoomMemberResponse(creatorId, members);
     }
 }

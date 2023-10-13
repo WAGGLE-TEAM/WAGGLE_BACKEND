@@ -4,6 +4,7 @@ import com.trip.api.chatting.dto.param.DeleteMessageParameter;
 import com.trip.api.chatting.dto.param.SendMessageParameter;
 import com.trip.api.chatting.dto.request.CreateChatMessageRequest;
 import com.trip.api.chatting.dto.request.CreateChatRoomRequest;
+import com.trip.api.chatting.dto.response.GetAllChatRoomMemberResponse;
 import com.trip.api.chatting.dto.response.GetAllChatRoomResponse;
 import com.trip.api.chatting.dto.response.GetChatMessageResponse;
 import com.trip.api.chatting.dto.response.GetMyChatRoomResponse;
@@ -84,6 +85,12 @@ public class ChattingController {
     @GetMapping
     public ResponseEntity<List<GetAllChatRoomResponse>> getAllChatRoom() {
         List<GetAllChatRoomResponse> result = chattingService.getAllChatRoom();
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/{chatRoomId}/members")
+    public ResponseEntity<GetAllChatRoomMemberResponse> getAllChatRoomMember(@PathVariable Long chatRoomId) {
+        GetAllChatRoomMemberResponse result = chattingService.getAllChatRoomMember(chatRoomId);
         return ResponseEntity.ok(result);
     }
 }
