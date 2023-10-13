@@ -12,11 +12,13 @@ import com.trip.api.report.repository.ReportChatMessageRepository;
 import com.trip.api.report.repository.ReportChatRoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 // TODO: writerId 탐색 기능 추가
 // TODO: admin에서 해당 신고 내용 조회 기능 추가
 @RequiredArgsConstructor
 @Service
+@Transactional
 public class ReportService {
 
     private final ReportChatRoomRepository reportChatRoomRepository;
