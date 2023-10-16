@@ -5,7 +5,7 @@ import lombok.Getter;
 import javax.validation.constraints.NotBlank;
 
 @Getter
-public class CreateChatRoomReportRequest {
+public class CreateReportRequest {
 
     @NotBlank
     private String reason;

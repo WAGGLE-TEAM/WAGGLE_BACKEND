@@ -18,4 +18,6 @@ public interface ChatMessageRepository extends JpaRepository<ChatMessage, Long> 
                     "WHERE id = :chatMessageId AND is_deleted = false"
     )
     Optional<Long> findChatMessageById(Long chatMessageId);
+
+    void deleteAllByChatRoomId(Long chatRoomId);
 }
