@@ -23,18 +23,18 @@ public interface ChatRoomMemberRepository extends JpaRepository<ChatRoomMember, 
 
     @Modifying
     @Query(
-            nativeQuery = true,
-            value = "UPDATE chat_room_member " +
-                    "SET is_exited = true " +
-                    "WHERE chat_room_id = :chatRoomId"
+        nativeQuery = true,
+        value = "UPDATE chat_room_member " +
+                "SET is_exited = true " +
+                "WHERE chat_room_id = :chatRoomId"
     )
     void deleteAllByChatRoomId(Long chatRoomId);
 
     @Query(
-            nativeQuery = true,
-            value = "SELECT * " +
-                    "FROM chat_room_member " +
-                    "WHERE member_id = :memberId AND chat_room_id = :chatRoomId"
+        nativeQuery = true,
+        value = "SELECT * " +
+                "FROM chat_room_member " +
+                "WHERE member_id = :memberId AND chat_room_id = :chatRoomId"
     )
     Optional<ChatRoomMember> findChatRoomMemberByMemberId(Long chatRoomId, Long memberId);
 }
