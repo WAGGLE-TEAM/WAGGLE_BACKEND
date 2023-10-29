@@ -1,4 +1,4 @@
-package com.trip.api.config;
+package com.trip.common.annotation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

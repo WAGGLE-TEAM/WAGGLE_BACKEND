@@ -18,4 +18,12 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
                 "WHERE id = :chatRoomId AND is_deleted = false"
     )
     Optional<Long> findChatRoomById(Long chatRoomId);
+
+    @Query(
+        nativeQuery = true,
+        value = "SELECT creator " +
+                "FROM chat_room " +
+                "WHERE id = :chatRoomId AND is_deleted = false"
+    )
+    Optional<Long> findCreatorById(Long chatRoomId);
 }

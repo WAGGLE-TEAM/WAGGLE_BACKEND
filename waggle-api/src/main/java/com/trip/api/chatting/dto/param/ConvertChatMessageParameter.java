@@ -1,6 +1,7 @@
 package com.trip.api.chatting.dto.param;
 
 import com.trip.api.chatting.dto.request.CreateChatMessageRequest;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

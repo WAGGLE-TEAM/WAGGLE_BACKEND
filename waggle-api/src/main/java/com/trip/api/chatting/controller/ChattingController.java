@@ -1,8 +1,12 @@
 package com.trip.api.chatting.controller;
 
+import com.trip.api.chatting.dto.param.DeleteMessageParameter;
 import com.trip.api.chatting.dto.param.SendMessageParameter;
 import com.trip.api.chatting.dto.request.CreateChatMessageRequest;
 import com.trip.api.chatting.dto.request.CreateChatRoomRequest;
+import com.trip.api.chatting.dto.response.GetAllChatRoomMemberResponse;
+import com.trip.api.chatting.dto.response.GetAllChatRoomResponse;
+import com.trip.api.chatting.dto.response.GetChatMessageResponse;
 import com.trip.api.chatting.dto.response.GetMyChatRoomResponse;
 import com.trip.api.chatting.service.ChattingService;
 
@@ -44,10 +48,10 @@ public class ChattingController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
+    @GetMapping("/my")
     public ResponseEntity<List<GetMyChatRoomResponse>> getMyChatRooms() {
         List<GetMyChatRoomResponse> result = chattingService.getMyChatRooms(71L);
-        return ResponseEntity.ok().body(result);
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping("/{chatRoomId}")
@@ -57,12 +61,36 @@ public class ChattingController {
     }
 
     // TODO: 이미지 전송 처리
-    @PostMapping("/message/{chatRoomId}")
+    @PostMapping("/{chatRoomId}/message")
     public ResponseEntity<Void> sendMessage(
         @PathVariable Long chatRoomId,
         @Valid @RequestBody CreateChatMessageRequest chatMessageRequest
     ) {
         Long messageId = chattingService.sendMessage(new SendMessageParameter(71L, chatRoomId, chatMessageRequest));
-        return ResponseEntity.created(URI.create("/chat/message/" + chatRoomId + "/" + messageId)).build();
+        return ResponseEntity.created(URI.create("/chat/" + chatRoomId + "/message/" + messageId)).build();
+    }
+
+    @DeleteMapping("{chatRoomId}/message/{messageId}")
+    public ResponseEntity<Void> deleteMessage(@PathVariable Long chatRoomId, @PathVariable Long messageId) {
+        chattingService.deleteMessage(new DeleteMessageParameter(chatRoomId, messageId, 71L));
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{chatRoomId}")
+    public ResponseEntity<List<GetChatMessageResponse>> getDetailChatRoom(@PathVariable Long chatRoomId) {
+        List<GetChatMessageResponse> result = chattingService.getChatMessages(chatRoomId);
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<GetAllChatRoomResponse>> getAllChatRoom() {
+        List<GetAllChatRoomResponse> result = chattingService.getAllChatRoom();
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/{chatRoomId}/members")
+    public ResponseEntity<GetAllChatRoomMemberResponse> getAllChatRoomMember(@PathVariable Long chatRoomId) {
+        GetAllChatRoomMemberResponse result = chattingService.getAllChatRoomMember(chatRoomId);
+        return ResponseEntity.ok(result);
     }
 }
