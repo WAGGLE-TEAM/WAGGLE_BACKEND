@@ -1,6 +1,6 @@
 package com.trip.api.chatting.entity;
 
-import com.trip.api.type.MessageType;
+import com.trip.common.type.MessageType;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -36,15 +36,14 @@ public class ChatMessage {
     private String message;
 
     @Column(name = "message_type", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private MessageType messageType;
+    private String messageType;
 
     @Column(name = "is_deleted")
     @ColumnDefault("false")
     private Boolean isDeleted;
 
     @Builder
-    public ChatMessage(Long memberId, Long chatRoomId, String message, MessageType messageType) {
+    public ChatMessage(Long memberId, Long chatRoomId, String message, String messageType) {
         this.memberId = memberId;
         this.chatRoomId = chatRoomId;
         this.message = message;
