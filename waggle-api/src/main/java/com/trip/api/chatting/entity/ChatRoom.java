@@ -1,5 +1,6 @@
 package com.trip.api.chatting.entity;
 
+import com.trip.api.entity.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "chat_room")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SQLDelete(sql = "UPDATE chat_room SET is_deleted = true WHERE id = ?")
-public class ChatRoom {
+public class ChatRoom extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

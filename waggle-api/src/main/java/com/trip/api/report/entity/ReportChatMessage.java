@@ -1,5 +1,6 @@
 package com.trip.api.report.entity;
 
+import com.trip.api.entity.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,7 +17,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @DynamicInsert
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ReportChatMessage {
+public class ReportChatMessage extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

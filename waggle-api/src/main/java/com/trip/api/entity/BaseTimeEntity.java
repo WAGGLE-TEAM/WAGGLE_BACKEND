@@ -1,4 +1,4 @@
-package com.trip.api.common.entity;
+package com.trip.api.entity;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 public abstract class BaseTimeEntity {
+
     @CreatedDate
     private LocalDateTime createdAt;
 

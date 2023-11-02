@@ -1,5 +1,6 @@
 package com.trip.api.report.entity;
 
+import com.trip.api.entity.BaseTimeEntity;
 import lombok.*;
 
 import org.hibernate.annotations.ColumnDefault;
@@ -14,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @DynamicInsert
 @Table(name = "report_chat_room")
-public class ReportChatRoom {
+public class ReportChatRoom extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

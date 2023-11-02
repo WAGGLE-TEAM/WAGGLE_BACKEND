@@ -1,6 +1,6 @@
 package com.trip.api.chatting.entity;
 
-import com.trip.common.type.MessageType;
+import com.trip.api.entity.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,7 +20,7 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "chat_message")
 @DynamicInsert
 @SQLDelete(sql = "UPDATE chat_message SET is_deleted = true WHERE id = ?")
-public class ChatMessage {
+public class ChatMessage extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

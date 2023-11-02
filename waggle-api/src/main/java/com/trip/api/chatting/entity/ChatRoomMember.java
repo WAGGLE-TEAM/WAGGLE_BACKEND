@@ -2,6 +2,7 @@ package com.trip.api.chatting.entity;
 
 import com.trip.api.chatting.dto.entitykey.ChatRoomMemberKey;
 
+import com.trip.api.entity.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ import javax.persistence.*;
 @DynamicInsert
 @SQLDelete(sql = "UPDATE chat_room_member SET is_deleted = true WHERE id = ?")
 @Entity
-public class ChatRoomMember {
+public class ChatRoomMember extends BaseTimeEntity {
 
     @EmbeddedId
     private ChatRoomMemberKey id;
