@@ -2,7 +2,7 @@ package com.trip.api.chatting.entity;
 
 import com.trip.api.chatting.dto.entitykey.ChatRoomMemberKey;
 
-import com.trip.api.entity.BaseTimeEntity;
+import com.trip.api.config.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

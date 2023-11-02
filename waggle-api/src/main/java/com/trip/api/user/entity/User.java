@@ -1,6 +1,6 @@
 package com.trip.api.user.entity;
 
-import com.trip.api.entity.BaseTimeEntity;
+import com.trip.api.config.BaseTimeEntity;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;

@@ -1,4 +1,4 @@
-package com.trip.api.entity;
+package com.trip.api.config;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

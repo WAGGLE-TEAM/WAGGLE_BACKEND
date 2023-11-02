@@ -1,6 +1,6 @@
 package com.trip.api.report.entity;
 
-import com.trip.api.entity.BaseTimeEntity;
+import com.trip.api.config.BaseTimeEntity;
 import lombok.*;
 
 import org.hibernate.annotations.ColumnDefault;
