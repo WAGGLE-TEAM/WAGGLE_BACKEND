@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./.env
+source ../.env
 
 ./gradlew clean build
 cd waggle-api
