@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface ChatRoomMemberRepository extends JpaRepository<ChatRoomMember, Long> {
 
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query(
             nativeQuery = true,
             value = "UPDATE chat_room_member " +
@@ -21,7 +21,7 @@ public interface ChatRoomMemberRepository extends JpaRepository<ChatRoomMember, 
     )
     void deleteChatRoomMember(Long chatRoomId, Long memberId);
 
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query(
         nativeQuery = true,
         value = "UPDATE chat_room_member " +

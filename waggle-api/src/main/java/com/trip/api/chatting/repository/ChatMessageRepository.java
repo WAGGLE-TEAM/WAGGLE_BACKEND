@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface ChatMessageRepository extends JpaRepository<ChatMessage, Long> {
 
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query(
         nativeQuery = true,
         value = "SELECT id " +
@@ -21,7 +21,7 @@ public interface ChatMessageRepository extends JpaRepository<ChatMessage, Long> 
     )
     Optional<Long> findChatMessageById(Long chatMessageId);
 
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query(
         nativeQuery = true,
         value = "UPDATE chat_message " +
