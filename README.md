@@ -1,28 +1,14 @@
 ## How to run on Docker container
-
-1. ./gradlew clean build
-2. cd waggle-api
-3.  java -Djarmode=layertools -jar build/libs/${jar file name} extract
-4. cd ..
-5. docker-compose build
-
-    ```java
-     docker-compose up -d --build
-    ```
-
-   - If you already build docker-compose, please follow this command
-
-       ```java
-       docker-compose up
-       ```
-
-
-
-**Windows Git Bash 사용 시 한번에 Build하는 방법**
+### MacOS
 ```
+cd scripts
+sh localbuild.sh
+```
+### WindowsOS
+```
+cd scripts
 sh .localbuild.sh
 ```
-
 
 ## Project structure
 
