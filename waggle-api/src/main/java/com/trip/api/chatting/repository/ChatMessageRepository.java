@@ -12,20 +12,17 @@ import java.util.Optional;
 @Repository
 public interface ChatMessageRepository extends JpaRepository<ChatMessage, Long> {
 
-    @Modifying(clearAutomatically = true)
     @Query(
-        nativeQuery = true,
         value = "SELECT id " +
-                "FROM chat_message " +
-                "WHERE id = :chatMessageId AND is_deleted = false"
+                "FROM ChatMessage " +
+                "WHERE id = :chatMessageId AND isDeleted = false"
     )
     Optional<Long> findChatMessageById(Long chatMessageId);
 
     @Modifying(clearAutomatically = true)
     @Query(
-        nativeQuery = true,
-        value = "UPDATE chat_message " +
-                "SET is_deleted = true " +
+        value = "UPDATE ChatMessage " +
+                "SET isDeleted = true " +
                 "WHERE id = :chatRoomId"
     )
     void deleteAllByChatRoomId(Long chatRoomId);

@@ -12,18 +12,16 @@ import java.util.Optional;
 public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
 
     @Query(
-        nativeQuery = true,
         value = "SELECT id " +
-                "FROM chat_room " +
-                "WHERE id = :chatRoomId AND is_deleted = false"
+                "FROM ChatRoom " +
+                "WHERE id = :chatRoomId AND isDeleted = false"
     )
     Optional<Long> findChatRoomById(Long chatRoomId);
 
     @Query(
-        nativeQuery = true,
         value = "SELECT creator " +
-                "FROM chat_room " +
-                "WHERE id = :chatRoomId AND is_deleted = false"
+                "FROM ChatRoom " +
+                "WHERE id = :chatRoomId AND isDeleted = false"
     )
     Optional<Long> findCreatorById(Long chatRoomId);
 }
