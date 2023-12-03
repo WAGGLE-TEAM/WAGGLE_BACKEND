@@ -1,7 +1,7 @@
 package com.trip.api.domain.chatting.dto.request;
 
 import com.trip.common.annotation.ValidateType;
-import com.trip.common.type.MessageType;
+import com.trip.common.dto.type.MessageType;
 
 import lombok.Getter;
 

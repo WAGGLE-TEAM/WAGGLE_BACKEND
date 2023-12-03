@@ -1,4 +1,4 @@
-package com.trip.api.exception;
+package com.trip.common.dto.type;
 
 import lombok.Getter;
 

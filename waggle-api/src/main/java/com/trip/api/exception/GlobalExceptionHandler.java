@@ -1,5 +1,7 @@
 package com.trip.api.exception;
 
+import com.trip.common.dto.response.ErrorResponse;
+import com.trip.common.dto.type.ErrorMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
