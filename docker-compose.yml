@@ -42,7 +42,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./log:/log  # 로그 파일을 저장할 볼륨 추가
+      - ./logs:/logs  # 로그 파일을 저장할 볼륨 추가
     depends_on:
       db:
         condition: service_healthy
