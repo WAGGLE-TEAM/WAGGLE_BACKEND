@@ -7,7 +7,7 @@ plugins {
     id 'jacoco'
 }
 
-group = 'com.trip'
+group = 'com.travity'
 version = '0.0.1-SNAPSHOT'
 
 repositories {
@@ -24,7 +24,7 @@ test {
 }
 
 application {
-    mainClass = 'com.trip.api'
+    mainClass = 'com.travity.api'
 }
 
 jacoco {
@@ -44,7 +44,7 @@ subprojects {
     bootJar.enabled = false
     jar.enabled = true
 
-    if (name == 'waggle-api') {
+    if (name == 'travity-api') {
         bootJar.enabled = true
     }
 

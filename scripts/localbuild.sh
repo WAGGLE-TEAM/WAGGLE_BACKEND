@@ -1,9 +1,6 @@
 #!/bin/bash
 source ../.env
 
-git submodule update --init
+git submodule update --remote --recursive --init
 ../gradlew clean build
-cd waggle-api
-java -Djarmode=layertools -jar build/libs/"${JAR_FILE_NAME}".jar extract
-cd ..
 docker-compose up -d --build
