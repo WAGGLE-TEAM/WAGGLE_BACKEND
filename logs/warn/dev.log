@@ -130,3 +130,6 @@ WARN  2024-01-08 15:06:18[main] [AnnotationConfigServletWebServerApplicationCont
 WARN  2024-01-08 15:07:53[main] [RootClass:287] - HHH000038: Composite-id class does not override equals(): com.travity.api.domain.chatting.dto.entitykey.ChatRoomMemberKey
 WARN  2024-01-08 15:07:53[main] [RootClass:290] - HHH000039: Composite-id class does not override hashCode(): com.travity.api.domain.chatting.dto.entitykey.ChatRoomMemberKey
 WARN  2024-01-08 15:07:54[main] [JpaBaseConfiguration$JpaWebConfiguration:219] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+WARN  2024-01-25 17:26:54[main] [RootClass:287] - HHH000038: Composite-id class does not override equals(): com.travity.api.domain.chatting.dto.entitykey.ChatRoomMemberKey
+WARN  2024-01-25 17:26:54[main] [RootClass:290] - HHH000039: Composite-id class does not override hashCode(): com.travity.api.domain.chatting.dto.entitykey.ChatRoomMemberKey
+WARN  2024-01-25 17:26:55[main] [JpaBaseConfiguration$JpaWebConfiguration:219] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
